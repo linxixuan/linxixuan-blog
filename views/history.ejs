@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body class="pg-history">
+        <header>
+            <ul class="filter">
+                <% for(var i = 0; i < tags.length; i++) {%>
+                <li class="filter__item">
+                    <%= tags[i] %>
+                </li>
+                <%}%>
+            </ul>
+        </header>
+        <div class="content">
+            <div class="time-line">
+                <div class="time-line__head">
+                </div>
+                <div class="time-line__body">
+                    <div class="content">
+                    <% blogs.forEach(function (blog) {%>
+                        <div class="node">
+                            <h3><%= blog.title %></h3>
+                            <p class="node__content">
+                                <span class="title"><%= blog.title %></span>
+                                <span class="content"><%= blog.content %></span>
+                            </p>
+                        </div>
+                    <%})%>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer></footer>
+    </body>
+</html>

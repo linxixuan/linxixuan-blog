@@ -1,0 +1,16 @@
+<div class="blog">
+    <div class="blog__cont">
+        <h2><% title %></h2>
+        <% content %>
+    </div>
+    <div class="blog__info">
+        <% time %>
+    </div>
+    <div clas="blog__tag">
+        <% for(var i = 0; i < tags.length; i++) {%>
+            <a href="">
+                <%= tags[i] %>
+            </a>
+        <%}%>
+    </div>
+</div>
