@@ -1,9 +1,9 @@
 /*
  * GET home page.
  */
-var crypto = require('crypto'),
-    HtmlHelper = require('../helper/HtmlHelper'),
-    commonData;
+var Blog = require('../models/blog');
+
+var commonData;
 
 module.exports = function(app){
 
@@ -11,6 +11,7 @@ module.exports = function(app){
         title: '林夕轩',
         avatar: '/images/sp-head.jpg'
     };
+
     app.get('/', function (req, res) {
         var data = commonData;
         data.blogs = [
@@ -35,23 +36,9 @@ module.exports = function(app){
     // 归档
     app.get('/history', function (req, res) {
         var data = commonData;
-        data.blogs = [
-            {
-                'title': 'hello world',
-                'content': 'hello! world!',
-                'time': '04.03',
-                'year': '2014',
-                'tags': ['hello', 'world']
-            },
-            {
-                'title': 'hello world',
-                'content': 'hello! world!',
-                'time': '04.03',
-                'year': '2014',
-                'tags': ['hello', 'world']
-            }    
-        ];
-        data.tags = ['all', 'javascript', 'css'];
+        Blog.get({}, function () {
+            console.log(arguments);
+        });
         res.render('history', data);
     });
 
