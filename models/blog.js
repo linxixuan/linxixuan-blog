@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 var blogSchema = new Schema({
     title: String,
-    name: String,
+    summary: String,
     content: String,
-    date: {type: Date, default: Date.now},
-    tags: Array
+    tags: Array,
+    date: {type: Date, default: Date.now}
 },{
     collection: 'blog'
 });
@@ -22,6 +22,19 @@ function Blog(blog) {
     this.content = blog.content;
     this.tags = this.tags;
     this.date = blog.date;
+}
+
+Blog.prototype.save = function (callback) {
+    var blog = {
+        title: this.title,
+        summary: this.summary,
+        content: this.content,
+        tags: this.tags,
+        date: this.date
+    };
+
+    var instance = new blogModel(blog);
+    instance.save();
 }
 
 Blog.get = function (config, callback) {

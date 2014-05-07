@@ -42,6 +42,22 @@ module.exports = function(app){
         res.render('history', data);
     });
 
+    // 提交博客
+    app.post('/blog', function (req, res) {
+        var blogReq = req.body;
+        var blog = new Blog(blogReq);
+        blog.save();
+
+        Blog.get({}, function () {
+        });
+        res.redirect('/');
+    });
+
+    app.get('/blog/edit', function (req, res) {
+        var data = commonData;
+        res.render('blog/edit', data);
+    });
+
     // animation ppt
     app.get('/animation', function (req, res) {
         var data = {};

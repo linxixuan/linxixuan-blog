@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <script charset="utf-8" src="/kindeditor/kindeditor-min.js"></script>
+        <script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+        <script>
+            var editor;
+            KindEditor.ready(function(K) {
+              editor = K.create('textarea', {
+              allowImageUpload : false,
+              items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic',
+                'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+              });
+            });
+        </script>
+    </head>
+    <body class="pg-blog-edit">
+        <form method="POST" action="/blog">
+            <input class="text" type="text" name="title" />
+            <textarea name="summary">
+            </textarea>
+            <textarea name="content">
+            </textarea>
+            <input class="text J-tags" type="input" name="tags" />
+            <input type="submit" value="提交" />
+        </form>
+    </body>
+</html>
