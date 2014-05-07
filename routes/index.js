@@ -14,42 +14,36 @@ module.exports = function(app){
 
     app.get('/', function (req, res) {
         var data = commonData;
-        data.blogs = [
-            {
-                'title': 'hello world',
-                'content': 'hello! world!',
-                'time': '04.03',
-                'year': '2014',
-                'tags': ['hello', 'world']
-            },
-            {
-                'title': 'hello world',
-                'content': 'hello! world!',
-                'time': '04.03',
-                'year': '2014',
-                'tags': ['hello', 'world']
-            }    
-        ];
-        res.render('index', data);
+        Blog.get({}, function (blogs) {
+            // 对日期进行处理
+            for(var index in blogs) {
+                var date = blogs[index].date;
+                blogs[index].date = null;
+                blogs[index].day = date.getMonth() + '-' + date.getDate();
+                blogs[index].year = date.getFullYear();
+            }
+            data.blogs = blogs;
+            res.render('index', data);
+        });
     });
 
     // 归档
     app.get('/history', function (req, res) {
         var data = commonData;
         Blog.get({}, function () {
-            console.log(arguments);
         });
         res.render('history', data);
     });
 
     // 提交博客
     app.post('/blog', function (req, res) {
-        var blogReq = req.body;
-        var blog = new Blog(blogReq);
-        blog.save();
+        var blogReq = req.body,
+            blog;
 
-        Blog.get({}, function () {
-        });
+        blogReq.date = new Date();
+        blog = new Blog(blogReq);
+
+        blog.save();
         res.redirect('/');
     });
 

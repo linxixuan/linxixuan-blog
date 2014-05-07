@@ -9,7 +9,7 @@ var blogSchema = new Schema({
     summary: String,
     content: String,
     tags: Array,
-    date: {type: Date, default: Date.now}
+    date: {type: Date}
 },{
     collection: 'blog'
 });
@@ -20,7 +20,7 @@ function Blog(blog) {
     this.title = blog.title;
     this.summary = blog.summary;
     this.content = blog.content;
-    this.tags = this.tags;
+    this.tags = blog.tags.split(',');
     this.date = blog.date;
 }
 
