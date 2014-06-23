@@ -5,6 +5,7 @@ mongoose.connect('mongodb://localhost/zmx');
 var Schema = mongoose.Schema;
 
 var blogSchema = new Schema({
+    bid: String,
     title: String,
     summary: String,
     content: String,
@@ -17,6 +18,7 @@ var blogSchema = new Schema({
 blogModel = mongoose.model('Blog', blogSchema);
 
 function Blog(blog) {
+    this.bid = blog.index;
     this.title = blog.title;
     this.summary = blog.summary;
     this.content = blog.content;
@@ -30,6 +32,7 @@ Blog.prototype.save = function (callback) {
         summary: this.summary,
         content: this.content,
         tags: this.tags,
+        bid: this.bid,
         date: this.date
     };
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body class="pg-blog">
+        <header>
+            <h1 class="title"><a href="/"><%= title %></a></h1>
+            <ul class="nav">
+                <li><a href="/index">首页</a></li>
+                <li><a href="/history">归档</a></li>
+                <li><a href="/RSS">订阅</a></li>
+                <li><a href="/about">关于我</a></li>
+            </ul>
+        </header>
+        <div class="content">
+            <div class="main">
+                <div class="blog">
+                    <h2 class="blog__title"><%- blog.title %></h2>
+                    <div class="blog__content"><%- blog.content %></div>
+                    <div class="blog__info">
+                        <p class="date"><%= blog.day %></p>
+                        <p class="tags">
+                        <% blog.tags.forEach(function (tag) {%>
+                            <span class="tags__item"><%- tag %></span>
+                        <% })%>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <aside>
+                <div class="about">
+                    <a class="link" href="/">
+                        <img src="<%= avatar %>" />
+                    </a>
+                </div>
+            </aside>
+        </div>
+        <footer></footer>
+    </body>
+</html>

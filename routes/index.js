@@ -18,7 +18,6 @@ module.exports = function(app){
             // 对日期进行处理
             for(var index in blogs) {
                 var date = blogs[index].date;
-                blogs[index].date = null;
                 blogs[index].day = date.getMonth() + '-' + date.getDate();
                 blogs[index].year = date.getFullYear();
             }
@@ -35,6 +34,21 @@ module.exports = function(app){
         res.render('history', data);
     });
 
+    // 博客展示页面
+    app.get('/blog', function (req, res) {
+        var data = commonData,
+            bname = req.query.bname;
+        Blog.get({bid: bname}, function (blog) {
+            if (blog[0]) {
+                blog = blog[0];
+                blog.day = blog.date.getFullYear() + '-' + blog.date.getMonth() + '-' + blog.date.getDate();
+                data.blog = blog;
+                res.render('blog/default', data);
+            } else {
+                res.redirect('/');
+            }
+        });
+    });
     // 提交博客
     app.post('/blog', function (req, res) {
         var blogReq = req.body,

@@ -1,3 +1,48 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* my style */
 body {
     margin:0;
     padding: 0;
@@ -26,6 +71,7 @@ header {
 }
 
 header .title {
+    margin-bottom:30px;
     font-size:40px;
 }
 
@@ -69,12 +115,12 @@ aside .about .link img {
     background:#FFF;
 }
 
-.pg-index .blog-list {
+.main {
     float:left;
     width:700px;
 }
 
-.pg-index .blog {
+.blog {
     position:relative;
     margin:60px 0 0;
     width:600px;
@@ -82,19 +128,19 @@ aside .about .link img {
     background:#FFF;
 }
 
-.pg-index .blog__cont {
+.blog__cont {
     padding:15px 20px 0;
 }
 
-.pg-index .blog__cont h2 {
+.blog__cont h2 {
     font-size:15px;
 }
 
-.pg-index .blog__cont .text {
+.blog__cont .text {
     font-size:12px;
 }
 
-.pg-index .blog__info {
+.blog__info {
     position:absolute;
     right:-100px;
     top:0;
@@ -102,8 +148,8 @@ aside .about .link img {
     width:100px;
 }
 
-.pg-index .blog__info .time,
-.pg-index .blog__info .plus {
+.blog__info .time,
+.blog__info .plus {
     position:absolute;
     top:0;
     bottom:0;
@@ -115,35 +161,51 @@ aside .about .link img {
     transition:all ease-in .3s;
 }
 
-.pg-index .blog__info .plus {
+.blog__info .plus {
     right:0;
     background:#999;
 }    
 
-.pg-index .blog__info .time:hover,
-.pg-index .blog__info .plus:hover {
+.blog__info .time:hover,
+.blog__info .plus:hover {
     background:#CF492E;
     opacity:1;
 }
 
-.pg-index .blog__info .time span,
-.pg-index .blog__info .plus span {
+.blog__info .time span,
+.blog__info .plus span {
     position:absolute;
     top:50%;
     left:50%;
     margin:-16px 0 0 -18px;
 }
 
-.pg-index .blog__tag {
+.blog__tag {
     border-top:1px dotted #CCC;
     padding:12px 20px;
 }
 
-.pg-index .blog__tag a {
+.blog__tag a {
     color:#CCC;
 }
 
-.pg-index .blog__tag a:hover {
+.blog__tag a:hover {
     color:#CF492E;
 }
 
+/* 单博客页面 */
+.pg-blog .blog {
+    padding:20px;
+}
+.pg-blog .blog__title {
+    margin-bottom:30px;
+    text-align:center;
+    font-size:18px;
+    color:#CF492E;
+}
+.pg-blog .blog__content {
+    line-height:30px;
+}
+.pg-blog .blog__content p {
+    text-indent:2em;
+}
