@@ -12,20 +12,6 @@ module.exports = function(app){
         avatar: '/images/sp-head.jpg'
     };
 
-    app.get('/', function (req, res) {
-        var data = commonData;
-        Blog.get({}, function (blogs) {
-            // 对日期进行处理
-            for(var index in blogs) {
-                var date = blogs[index].date;
-                blogs[index].day = date.getMonth() + '-' + date.getDate();
-                blogs[index].year = date.getFullYear();
-            }
-            data.blogs = blogs;
-            res.render('index', data);
-        });
-    });
-
     // 归档
     app.get('/history', function (req, res) {
         var data = commonData;
@@ -49,6 +35,7 @@ module.exports = function(app){
             }
         });
     });
+
     // 提交博客
     app.post('/blog', function (req, res) {
         var blogReq = req.body,
@@ -80,5 +67,24 @@ module.exports = function(app){
 
         data.FEs = FEs;
         res.render('resource', data);
+    });
+
+    app.get('/blogs', function (req, res) {
+        var data = commonData;
+        Blog.get({}, function (blogs) {
+            // 对日期进行处理
+            for(var index in blogs) {
+                var date = blogs[index].date;
+                blogs[index].day = date.getMonth() + '-' + date.getDate();
+                blogs[index].year = date.getFullYear();
+            }
+            data.blogs = blogs;
+            res.render('blog/index', data);
+        });
+    });
+
+    app.get('/', function (req, res) {
+        var data = commonData;
+        res.render('index', data);
     });
 };

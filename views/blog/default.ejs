@@ -4,9 +4,9 @@
         <title><%= title %></title>
         <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
-    <% include ../common/header %>
     <body class="pg-blog">
-        <div class="content">
+        <% include ../common/header %>
+        <div class="content cf">
             <div class="main">
                 <div class="blog">
                     <h2 class="blog__title"><%- blog.title %></h2>
@@ -29,6 +29,6 @@
                 </div>
             </aside>
         </div>
-        <footer></footer>
+        <% include ../common/footer %>
     </body>
 </html>

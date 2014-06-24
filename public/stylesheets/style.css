@@ -107,15 +107,9 @@ header .nav li a {
 
 /* footer样式 */
 footer {
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    border-bottom:2px solid #CF492E;
+    border-top:2px solid #CF492E;
     padding:10px 0;
     text-align:center;
-    background:#FFF;
-    box-shadow:-1px 0 20px 1px #333;
 }
 
 footer .link-wrapper {
