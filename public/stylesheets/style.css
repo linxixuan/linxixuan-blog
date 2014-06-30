@@ -52,9 +52,6 @@ body {
 
 a {
     color:#CF492E;
-    -webkit-transition:color ease-in .3s;
-    -moz-transition:color ease-in .3s;
-    transition:color ease-in .3s;
     text-decoration:none;
 }
 
@@ -131,9 +128,12 @@ footer .link-wrapper .extra-link {
 }
 
 /* 内容区域 */
-.content {
+.body {
     margin:0 auto 50px;
     width:980px;
+}
+.body .content {
+    float:left;
 }
 
 aside {
@@ -250,4 +250,58 @@ aside .about .link img {
 }
 .pg-blog .blog__content p {
     text-indent:2em;
+}
+
+/* 归档页面 */
+.pg-history .content {
+    width:700px;
+}
+.pg-history .filter {
+    margin-top:60px;
+    padding-bottom:10px;
+    border-bottom:1px dotted #999;
+    width:100%;
+}
+.pg-history .filter__item {
+    float:left;
+    margin-right:20px;
+    padding:5px 10px;
+    border:1px solid #666;
+    border-radius:2px;
+    background:#EEE;
+    opacity:.8;
+    box-shadow:1px 1px 5px 1px #999;
+}
+.pg-history .filter__item:hover {
+    opacity:1;
+}
+.pg-history .blog-list {
+    padding-top:20px;
+}
+.pg-history .blog {
+    position:relative;
+    float:left;
+    margin-top:0;
+    margin-right:15px;
+    padding:5px;
+    border-radius:3px;
+    width:120px;
+    height:120px;
+    overflow:hidden;
+    text-overflow:eclipse;
+    cursor:pointer;
+}
+.pg-history .blog:hover .blog__time{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    line-height:120px;
+    text-align:center;
+    font-size:24px;
+    color:#FFF;
+    background:#333;
+    opacity:.7;
+    z-index:10;
 }

@@ -4,9 +4,33 @@
         <title><%= title %></title>
         <link rel='stylesheet' href='/stylesheets/style.css' />
     </head>
-    <body class="pg-index">
+    <body class="pg-blog-index">
         <% include common/header %>
-        <div class="content cf">
+        <div class="body cf">
+            <div class="content">
+                <div class="main blog-list">
+                    <% blogs.forEach(function (blog) { %>
+                    <% var link = '/blog?bname=' + blog.bid; %>
+                    <div class="blog">
+                        <div class="blog__cont">
+                            <h2><a href="<%= link %>"><%- blog.title %></a></h2>
+                            <p class="text"><%- blog.summary %></p>
+                        </div>
+                        <div class="blog__info">
+                            <a href="<%= link %>" class="time"><span><%= blog.day %><br /><%= blog.year %></span></a>
+                            <a href="<%= link %>" class="plus"><span></span></a>
+                        </div>
+                        <div class="blog__tag">
+                            <% for(var i = 0; i < blog.tags.length; i++) {%>
+                                <a href="">
+                                    <%= blog.tags[i] %>
+                                </a>
+                            <%}%>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
             <aside>
                 <div class="about">
                     <a class="link" href="/">

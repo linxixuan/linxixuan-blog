@@ -15,9 +15,16 @@ module.exports = function(app){
     // 归档
     app.get('/history', function (req, res) {
         var data = commonData;
-        Blog.get({}, function () {
+        Blog.get({}, function (blogs) {
+            // 对日期进行处理
+            for(var index in blogs) {
+                var date = blogs[index].date;
+                blogs[index].day = date.getMonth() + '-' + date.getDate();
+                blogs[index].year = date.getFullYear();
+            }
+            data.blogs = blogs;
+            res.render('history', data);
         });
-        res.render('history', data);
     });
 
     // 博客展示页面
@@ -59,17 +66,7 @@ module.exports = function(app){
         res.render('animation', data);
     });
 
-    // FE资源管理
-    app.get('/feresource', function (req, res) {
-        var data = {},
-            FEs = ['xiaoming', 'xiaohong'],
-            dates = ['周一', '周二', '周三', '周四', '周五'];
-
-        data.FEs = FEs;
-        res.render('resource', data);
-    });
-
-    app.get('/blogs', function (req, res) {
+    app.get('/', function (req, res) {
         var data = commonData;
         Blog.get({}, function (blogs) {
             // 对日期进行处理
@@ -79,12 +76,7 @@ module.exports = function(app){
                 blogs[index].year = date.getFullYear();
             }
             data.blogs = blogs;
-            res.render('blog/index', data);
+            res.render('index', data);
         });
-    });
-
-    app.get('/', function (req, res) {
-        var data = commonData;
-        res.render('index', data);
     });
 };
