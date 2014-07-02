@@ -79,4 +79,10 @@ module.exports = function(app){
             res.render('index', data);
         });
     });
+
+    // 关于我
+    app.get('/about', function (req, res) {
+        var data = commonData;
+        res.render('about', data);
+    });
 };
