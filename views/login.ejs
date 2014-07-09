@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body class="pg-login">
+        <% include common/header %>
+        <div class="body cf">
+            <div class="content">
+                <form class="login-block" method="POST">
+                    <div class="field">
+                        <span class="field__title">账号：</span>
+                        <input type="text" class="field__input" name="account" />
+                    </div>
+                    <div class="field">
+                        <span class="field__title">密码：</span>
+                        <input type="password" class="field__input" name="password" />
+                    </div>
+                    <div class="field">
+                        <input type="submit" class="btn" value="提交" />
+                    </div>
+                </form>
+            </div>
+            <aside>
+                <div class="about">
+                    <a class="link" href="/">
+                        <img src="<%= avatar %>" />
+                    </a>
+                </div>
+            </aside>
+        </div>
+        <% include common/footer %>
+    </body>
+</html>

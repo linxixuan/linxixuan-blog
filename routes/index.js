@@ -9,7 +9,7 @@ module.exports = function(app){
 
     commonData = {
         title: '林夕轩',
-        avatar: '/images/sp-head.jpg'
+        avatar: '/images/sp-head.jpg',
     };
 
     // 归档
@@ -56,8 +56,14 @@ module.exports = function(app){
     });
 
     app.get('/blog/edit', function (req, res) {
-        var data = commonData;
-        res.render('blog/edit', data);
+        var data = commonData,
+            cookie = req.header('Cookie').split('=');
+
+        if (cookie.indexOf('uid') !== -1) {
+            res.render('blog/edit', data);
+        } else {
+            res.redirect('../../login');
+        }
     });
 
     // animation ppt
@@ -84,5 +90,24 @@ module.exports = function(app){
     app.get('/about', function (req, res) {
         var data = commonData;
         res.render('about', data);
+    });
+
+    // 登录页
+    app.get('/login', function (req, res) {
+        var data = commonData;
+        res.render('login', data);
+    });
+
+    // 提交登录
+    app.post('/login', function (req, res) {
+        var account = req.body.account,
+            psw = req.body.password;
+        if (account === 'l' && psw === 'l') {
+            res.cookie('uid', account + '*' + psw, {maxAge: 1800});
+            res.render('blog/edit', commonData);
+        } else {
+            res.clearCookie('uid');
+            res.render('/login', commonData);
+        }
     });
 };

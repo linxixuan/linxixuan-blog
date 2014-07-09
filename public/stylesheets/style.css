@@ -446,3 +446,16 @@ aside .about .link img {
     opacity:1;
     transition:opacity .3s linear;
 }
+
+/* 登陆页 */
+.pg-login .login-block {
+    margin-top:60px;
+    padding:17px;
+    font-size:16px;
+    background:url(images/bg-deep.png);
+}
+.pg-login .field {
+    padding:10px 30px;
+    width:400px;
+    background:#FFF;
+}
