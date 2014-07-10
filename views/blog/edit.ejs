@@ -3,29 +3,48 @@
     <head>
         <title><%= title %></title>
         <link rel='stylesheet' href='/stylesheets/style.css' />
-        <script charset="utf-8" src="/kindeditor/kindeditor-min.js"></script>
-        <script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
-        <script>
-            var editor;
-            KindEditor.ready(function(K) {
-              editor = K.create('textarea', {
-              allowImageUpload : false,
-              items : [
-                'emoticons', 'image', 'link']
-              });
-            });
-        </script>
+        <script charset="utf-8" src="/javascripts/jquery-1.7.1.min.js"></script>
+        <script charset="utf-8" src="/epiceditor/js/epiceditor.js"></script>
     </head>
     <body class="pg-blog-edit">
-        <form method="POST" action="/blog">
-            <input name="index" type="text" />
-            <input class="text" type="text" name="title" />
-            <textarea name="summary">
-            </textarea>
-            <textarea name="content">
-            </textarea>
-            <input class="text J-tags" type="input" name="tags" />
-            <input type="submit" value="提交" />
+        <form class="wrapper" method="POST" action="/blog">
+            <div class="field">
+                <span>url：</span>
+                <input name="index" type="text" />
+            </div>
+            <div class="field">
+                <span>标题：</span>
+                <input class="text" type="text" name="title" />
+            </div>
+            <div class="field">
+                <span>标签：</span>
+                <input class="text J-tags" type="input" name="tags" />
+            </div>
+            <div class="field">
+                <h3>概要：</h3>
+                <textarea name="summary" class="J-summary"></textarea>
+            </div>
+            <div class="field" style="display:none">
+                <textarea name="content" class="J-content"></textarea>
+            </div>
+            <div class="field">
+                <h3>正文：</h3>
+                <div id="epiceditor"></div>
+            </div>
+            <div class="field">
+                <input type="button" value="生成" class="J-generat" />
+                <input type="submit" value="提交" />
+            </div>
         </form>
+        <script type="text/javascript" >
+            var editor = new EpicEditor({basePath: '/epiceditor', height: 800}).load();
+            editor.reflow('width');
+            $('.J-generat').bind('click', function () {
+                editor.reflow('height');
+                var ndContainer = $($('iframe')[0].contentWindow.document.body).find('#epiceditor-editor-frame')[0].contentWindow.document.body, // 插件会创建两层iframe
+                data = ndContainer.innerHTML; // 获取iframe里的内容
+                $('.J-content').html(data);
+            });
+        </script>
     </body>
 </html>

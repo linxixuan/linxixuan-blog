@@ -1,7 +1,9 @@
 /*
  * GET home page.
  */
-var Blog = require('../models/blog');
+var Blog = require('../models/blog'),
+    hljs = require('highlight.js'),
+    marked = require('marked');
 
 var commonData;
 
@@ -31,10 +33,25 @@ module.exports = function(app){
     app.get('/blog', function (req, res) {
         var data = commonData,
             bname = req.query.bname;
+
+         marked.setOptions({
+             gfm: true,
+             tables: true,
+             breaks: true,
+             pedantic: false,
+             sanitize: false,
+             smartLists: true,
+             langPrefix: '',
+             highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+             }
+         });
+
         Blog.get({bid: bname}, function (blog) {
             if (blog[0]) {
                 blog = blog[0];
                 blog.day = blog.date.getFullYear() + '-' + blog.date.getMonth() + '-' + blog.date.getDate();
+                blog.content = marked('```js\n console.log("hello");```');
                 data.blog = blog;
                 res.render('blog/default', data);
             } else {
