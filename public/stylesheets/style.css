@@ -236,6 +236,28 @@ aside .about .link img {
 .pg-blog .blog__content p {
     text-indent:2em;
 }
+.pg-blog .blog__info {
+    position:static;
+    top:auto;
+    bottom:auto;
+    left:0;
+    margin:0 -20px -20px;
+    border-top:1px dotted #CCC;
+    width:auto;
+    padding:20px;
+    color:#CCC;
+}
+
+.pg-blog .blog__info .date,
+.pg-blog .blog__info .tags {
+    margin:0 0 10px;
+}
+.pg-blog .blog__info .tags {
+    margin:0;
+}
+.pg-blog .blog__info .tags__item {
+    margin-right:10px;
+}
 
 /* 归档页面 */
 .pg-history .content {
