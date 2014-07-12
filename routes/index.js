@@ -119,7 +119,7 @@ module.exports = function(app){
     app.post('/login', function (req, res) {
         var account = req.body.account,
             psw = req.body.password;
-        if (account === 'l' && psw === 'l') {
+        if (account === 'zmx6631356' && psw === '277475785') {
             res.cookie('uid', account + '*' + psw, {maxAge: 1800});
             res.render('blog/edit', commonData);
         } else {
