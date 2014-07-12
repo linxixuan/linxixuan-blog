@@ -74,8 +74,9 @@ module.exports = function(app){
 
     app.get('/blog/edit', function (req, res) {
         var data = commonData,
-            cookie = req.header('Cookie').split('=');
-
+            cookie;
+        if(!req.header('Cookie')) res.redirect('../../login');
+        cookie = req.header('Cookie').split('=')
         if (cookie.indexOf('uid') !== -1) {
             res.render('blog/edit', data);
         } else {
@@ -124,7 +125,7 @@ module.exports = function(app){
             res.render('blog/edit', commonData);
         } else {
             res.clearCookie('uid');
-            res.render('/login', commonData);
+            res.render('login', commonData);
         }
     });
 };
