@@ -51,7 +51,7 @@ module.exports = function(app){
             if (blog[0]) {
                 blog = blog[0];
                 blog.day = blog.date.getFullYear() + '-' + blog.date.getMonth() + '-' + blog.date.getDate();
-                blog.content = marked('```js\n console.log("hello");```');
+                blog.content = marked(blog.content);
                 data.blog = blog;
                 res.render('blog/default', data);
             } else {
