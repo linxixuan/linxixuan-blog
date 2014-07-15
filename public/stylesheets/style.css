@@ -219,6 +219,7 @@ aside .about .link img {
 
 /* 单博客页面 */
 .pg-blog .blog {
+    margin-bottom:20px;
     padding:20px;
 }
 .pg-blog .blog__title {
@@ -254,6 +255,9 @@ aside .about .link img {
 }
 .pg-blog .blog__info .tags__item {
     margin-right:10px;
+}
+.pg-blog #disqus_thread {
+    width:600px;
 }
 
 /* 归档页面 */
