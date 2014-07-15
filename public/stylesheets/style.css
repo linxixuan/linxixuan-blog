@@ -87,6 +87,12 @@ header .nav li a {
     color:#666;
 }
 
+.simple-header {
+    margin-bottom:10px;
+    padding:10px 0;
+    box-shadow:1px 0 5px 1px #333;
+}
+
 /* footer样式 */
 footer {
     border-top:2px solid #CF492E;
@@ -228,11 +234,6 @@ aside .about .link img {
 .pg-blog {
     background:#FFF;
 }
-.pg-blog header {
-    margin-bottom:10px;
-    padding:10px 0;
-    box-shadow:1px 0 5px 1px #333;
-}
 .pg-blog .blog {
     margin:0 0 20px;
     border-bottom:2px solid #999;
@@ -280,9 +281,10 @@ aside .about .link img {
 }
 .pg-history .filter {
     margin-top:60px;
-    padding-bottom:10px;
+    padding:0 0 10px 0;
     border-bottom:1px dotted #999;
     width:100%;
+    list-style:none;
 }
 .pg-history .filter__item {
     float:left;
@@ -310,8 +312,9 @@ aside .about .link img {
     width:120px;
     height:120px;
     overflow:hidden;
-    text-overflow:eclipse;
+    text-overflow:ellipsis;
     cursor:pointer;
+    font-size:12px;
 }
 .pg-history .blog:hover .blog__time{
     position:absolute;
@@ -329,20 +332,20 @@ aside .about .link img {
 }
 
 /* 关于我 */
+.pg-about {
+    background:#FFF;
+}
 .pg-about .body {
-    margin-top:60px;
-    border:1px solid #EDEDED;
-    border-radius:5px;
     min-height:1000px;
     font-size:18px;
     color:#333;
     line-height:1.5;
-    background:#FFF;
 }
-.pg-about h1 {
-    font-size:32px;
-    text-align:center;
+.pg-about .title {
     padding:6px 0;
+    text-align:center;
+    font-size:32px;
+    color:#CF492E;
 }
 .pg-about .sub-title {
     text-align:right;

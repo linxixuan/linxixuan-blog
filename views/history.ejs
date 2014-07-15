@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><%= title %></title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include common/head %>
     </head>
     <body class="pg-history">
         <% include common/header %>
@@ -18,7 +16,7 @@
                     <div class="blog">
                         <span class="blog__title"><%- blog.title %></span>
                         <span class="blog__summary"><%- blog.summary %></span>
-                        <a href="<%= link %>" class="blog__time"><%= blog.day %>月<%= blog.year %>日</a>
+                        <a href="<%= link %>" class="blog__time"><%= blog.year %>-<%= blog.day %></a>
                     </div>
                     <% }) %>
                 </div>

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><%= title %></title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include common/head %>
     </head>
     <body class="pg-about">
+        <header class="simple-header">
+            <ul class="nav">
+                <li><a href="/">首页</a></li>
+                <li><a href="/history">归档</a></li>
+                <li><a href="/about">关于我</a></li>
+            </ul>
+        </header>
         <div class="body cf">
-            <h1>关于我</h1>
+            <h1 class="title">关于我</h1>
             <h2 class="sub-title">一个菜鸟前端的自白</h2>
             <div class="block block--life">
                 <h2 class="block__title">经历</h2>
@@ -43,7 +48,7 @@
                         <span class="tag">达达乐队</span>
                         <span class="tag">Backstreet Boys</span>
                         <span class="tag">One Republic</span>
-                        <span class="tag">Jason Marz</span>
+                        <span class="tag">Jason Mraz</span>
                     </dd>
                     <dt>漫画</dt>
                     <dd>
