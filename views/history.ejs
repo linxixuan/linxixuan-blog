@@ -14,7 +14,7 @@
                     <% blogs.forEach(function (blog) { %>
                     <% var link = '/blog?bname=' + blog.bid; %>
                     <div class="blog">
-                        <span class="blog__title"><%- blog.title %></span>
+                        <h5 class="blog__title"><%- blog.title %></h5>
                         <span class="blog__summary"><%- blog.summary %></span>
                         <a href="<%= link %>" class="blog__time"><%= blog.year %>-<%= blog.day %></a>
                     </div>

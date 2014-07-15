@@ -2,6 +2,7 @@
 <html>
     <% include ../common/head %>
         <link rel='stylesheet' href='/stylesheets/highlight/github.css' />
+        <script charset="utf-8" src="/javascripts/jquery-1.7.1.min.js"></script>
     </head>
     <body class="pg-blog">
         <header class="simple-header">
@@ -28,14 +29,14 @@
         </div>
         <% include ../common/footer %>
         <script type="text/javascript">  
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */  
-            var disqus_shortname = 'linxixuan';                      
-            /* * * DON'T EDIT BELOW THIS LINE * * */  
-            (function() {  
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;  
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';  
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);  
-            })();  
+            $(function () {
+                var disqus_shortname = 'linxixuan';                      
+                (function() {  
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;  
+                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';  
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);  
+                })();  
+            });
         </script>  
     </body>
 </html>

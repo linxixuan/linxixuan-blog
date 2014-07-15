@@ -316,6 +316,9 @@ aside .about .link img {
     cursor:pointer;
     font-size:12px;
 }
+.pg-history .blog .blog__title {
+    text-align:center;
+}
 .pg-history .blog:hover .blog__time{
     position:absolute;
     top:0;
@@ -451,6 +454,7 @@ aside .about .link img {
     text-align:center;
     overflow:hidden;
     box-shadow:1px 1px 5px 0 #EDEDED;
+    font-size:14px;
 }
 
 .pg-about .program .inner {
@@ -461,7 +465,7 @@ aside .about .link img {
     left:0;
     right:0;
     line-height:1.5;
-    font-size:16px;
+    font-size:14px;
     opacity:0;
     color:#FFF;
     background:#CF492E;
