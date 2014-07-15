@@ -8,43 +8,38 @@
         <script src=""></script>
     </head>
     <body class="pg-blog">
-        <% include ../common/header %>
+        <header>
+            <ul class="nav">
+                <li><a href="/">首页</a></li>
+                <li><a href="/history">归档</a></li>
+                <li><a href="/about">关于我</a></li>
+            </ul>
+        </header>
         <div class="body cf">
-            <div class="content">
-                <div class="main">
-                    <div class="blog">
-                        <h2 class="blog__title"><%- blog.title %></h2>
-                        <div class="blog__content"><%- blog.content %></div>
-                        <div class="blog__info">
-                            <p class="date"><%= blog.day %></p>
-                            <p class="tags">
-                            <% blog.tags.forEach(function (tag) {%>
-                                <span class="tags__item"><%- tag %></span>
-                            <% })%>
-                            </p>
-                        </div>
-                    </div>
-                    <div id="disqus_thread"></div>
-                    <script type="text/javascript">  
-                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */  
-                        var disqus_shortname = 'linxixuan';                      
-                        /* * * DON'T EDIT BELOW THIS LINE * * */  
-                        (function() {  
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;  
-                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';  
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);  
-                        })();  
-                    </script>  
+            <div class="blog">
+                <h2 class="blog__title"><%- blog.title %></h2>
+                <div class="blog__content"><%- blog.content %></div>
+                <div class="blog__info">
+                    <p class="date"><%= blog.day %></p>
+                    <p class="tags">
+                    <% blog.tags.forEach(function (tag) {%>
+                        <span class="tags__item"><%- tag %></span>
+                    <% })%>
+                    </p>
                 </div>
-                <aside>
-                    <div class="about">
-                        <a class="link" href="/">
-                            <img src="<%= avatar %>" />
-                        </a>
-                    </div>
-                </aside>
             </div>
+            <div id="disqus_thread"></div>
         </div>
         <% include ../common/footer %>
+        <script type="text/javascript">  
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */  
+            var disqus_shortname = 'linxixuan';                      
+            /* * * DON'T EDIT BELOW THIS LINE * * */  
+            (function() {  
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;  
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';  
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);  
+            })();  
+        </script>  
     </body>
 </html>

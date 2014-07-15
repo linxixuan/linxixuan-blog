@@ -23,7 +23,9 @@ table {
 body {
     margin:0;
     padding: 0;
-    font: 14px "effra", Helvetica, Arial, sans-serif;
+    font-size:16px;
+    font-family:Georgia, 'Times New Roman', Times, 'Songti SC', SimSun, serif;
+    font-weight:100;
     background:url(images/bg-shadow.png);
 }
 
@@ -71,6 +73,7 @@ header .title {
 }
 
 header .nav {
+    padding:0;
     list-style:none;
 }
 
@@ -149,6 +152,7 @@ aside .about .link img {
     margin:60px 0 0;
     width:600px;
     min-height:70px;
+    line-height:2;
     background:#FFF;
 }
 
@@ -170,6 +174,7 @@ aside .about .link img {
     top:0;
     bottom:0;
     width:100px;
+    line-height:1;
 }
 
 .blog__info .time,
@@ -207,9 +212,11 @@ aside .about .link img {
 .blog__tag {
     border-top:1px dotted #CCC;
     padding:12px 20px;
+    font-size:12px;
 }
 
 .blog__tag a {
+    margin-right:10px;
     color:#CCC;
 }
 
@@ -218,14 +225,24 @@ aside .about .link img {
 }
 
 /* 单博客页面 */
+.pg-blog {
+    background:#FFF;
+}
+.pg-blog header {
+    margin-bottom:10px;
+    padding:10px 0;
+    box-shadow:1px 0 5px 1px #333;
+}
 .pg-blog .blog {
-    margin-bottom:20px;
+    margin:0 0 20px;
+    border-bottom:2px solid #999;
     padding:20px;
+    width:100%;
 }
 .pg-blog .blog__title {
     margin-bottom:30px;
     text-align:center;
-    font-size:18px;
+    font-size:30px;
     color:#CF492E;
 }
 .pg-blog .blog__content {
@@ -255,9 +272,6 @@ aside .about .link img {
 }
 .pg-blog .blog__info .tags__item {
     margin-right:10px;
-}
-.pg-blog #disqus_thread {
-    width:600px;
 }
 
 /* 归档页面 */
