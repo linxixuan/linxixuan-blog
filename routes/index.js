@@ -3,6 +3,8 @@
  */
 var Blog = require('../models/blog'),
     hljs = require('highlight.js'),
+    fs = require('fs'),
+    path = require('path'),
     marked = require('marked');
 
 var commonData;
@@ -127,5 +129,15 @@ module.exports = function(app){
             res.clearCookie('uid');
             res.render('login', commonData);
         }
+    });
+
+    // 机器人文档
+    app.get('/robots.txt', function (req, res) {
+        var dir = path.resolve(__dirname, '..');
+        fs.readFile(dir + '/webroot/robots.txt', function (err, data) {
+            data += '';
+            res.set('Content-Type', 'text/plain');
+            res.send(data);
+        });
     });
 };
