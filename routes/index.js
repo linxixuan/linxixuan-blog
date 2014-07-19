@@ -37,7 +37,7 @@ module.exports = function(app){
         Blog.get({bid: bname}, function (blog) {
             if (blog[0]) {
                 blog = blog[0];
-                blog.day = blog.date.getFullYear() + '-' + blog.date.getMonth() + '-' + blog.date.getDate();
+                blog.day = blog.date.getFullYear() + '-' + (blog.date.getMonth() + 1) + '-' + blog.date.getDate();
                 blog.content = marked(blog.content);
                 data.blog = blog;
                 res.render('blog/default', data);
@@ -83,7 +83,7 @@ module.exports = function(app){
             // 对日期进行处理
             for(var index in blogs) {
                 var date = blogs[index].date;
-                blogs[index].day = date.getMonth() + '-' + date.getDate();
+                blogs[index].day = (date.getMonth() + 1) + '-' + date.getDate();
                 blogs[index].year = date.getFullYear();
             }
             data.blogs = blogs;
