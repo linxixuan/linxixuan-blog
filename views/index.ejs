@@ -20,7 +20,7 @@
                         </div>
                         <div class="blog__tag">
                             <% for(var i = 0; i < blog.tags.length; i++) {%>
-                                <a href="">
+                                <a href="/history?tag=<%= blog.tags[i]%>">
                                     <%= blog.tags[i] %>
                                 </a>
                             <%}%>
