@@ -16,21 +16,6 @@ module.exports = function(app){
         avatar: '/images/sp-head.jpg',
     };
 
-    // 归档
-    app.get('/history', function (req, res) {
-        var data = commonData;
-        Blog.get({}, function (blogs) {
-            // 对日期进行处理
-            for(var index in blogs) {
-                var date = blogs[index].date;
-                blogs[index].day = date.getMonth() + '-' + date.getDate();
-                blogs[index].year = date.getFullYear();
-            }
-            data.blogs = blogs;
-            res.render('history', data);
-        });
-    });
-
     // 博客展示页面
     app.get('/blog', function (req, res) {
         var data = commonData,
@@ -138,6 +123,63 @@ module.exports = function(app){
             data += '';
             res.set('Content-Type', 'text/plain');
             res.send(data);
+        });
+    });
+
+    // 获取指定条件的博客
+    app.get('/history', function (req, res) {
+        var query = req.query,
+            value,
+            blogs = [],
+            config = {},
+            beginDate,
+            endDate,
+            data = commonData,
+            isAjax = req.xhr;
+
+        if (Object.keys(query).length > 1) {
+            res.redirect('/');
+        }
+
+        // 搜索标签
+        if (query.hasOwnProperty('tag')) {
+            value = query['tag'];
+            config = {tags: {$in: [value]}};
+        }
+
+        if (query.hasOwnProperty('date')) {
+            value = query['date'];
+            beginDate = new Date(value.split('-')[0]);
+            endDate = new Date(value.split('-')[1]);
+            config = {date: {$lte: endDate, $gt: beginDate}};
+        }
+
+        Blog.get(config, function (blogs) {
+            var tagList = [],
+                dateList = [];
+            // 对日期进行处理
+            for(var index in blogs) {
+                var date = blogs[index].date,
+                    tags = blogs[index].tags,
+                    year = date.getFullYear(),
+                    month = date.getMonth(),
+                    day = date.getDate();
+                for (var i = 0, len = tags.length; i < len; i++) {
+                    if (tagList.indexOf(tags[i]) === -1) {
+                        tagList.push(tags[i]);
+                    }
+                }
+                dateList.push(year + '年' + month + '月');
+                blogs[index].day = month + '-' + day;
+                blogs[index].year = year;
+            }
+            data.blogs = blogs;
+            data.tagList = tagList;
+            data.dateList = dateList;
+
+            if (!isAjax) {
+                res.render('history', data);
+            }
         });
     });
 };

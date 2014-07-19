@@ -5,13 +5,7 @@
         <script charset="utf-8" src="/javascripts/jquery-1.7.1.min.js"></script>
     </head>
     <body class="pg-blog">
-        <header class="simple-header">
-            <ul class="nav">
-                <li><a href="/">首页</a></li>
-                <li><a href="/history">归档</a></li>
-                <li><a href="/about">关于我</a></li>
-            </ul>
-        </header>
+        <% include ../common/header-simple %>
         <div class="body cf">
             <div class="blog">
                 <h2 class="blog__title"><%- blog.title %></h2>
