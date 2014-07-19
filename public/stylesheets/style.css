@@ -133,7 +133,7 @@ aside {
 }
 
 aside .about {
-    margin-top:60px;
+    margin:60px 0 20px;
     padding:17px;
     background:url(images/bg-deep.png);
 }
