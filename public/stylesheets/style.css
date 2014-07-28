@@ -494,3 +494,15 @@ aside .about .link img {
     margin:0 auto;
     width:980px;
 }
+.pg-blog-edit .wrapper h1 {
+    text-align:center;
+}
+.pg-blog-edit .form-group--short {
+    width:200px;
+}
+.pg-blog-edit .form-group--summary .form-control {
+    height:100px;
+}
+.pg-blog-edit .form-group--context .form-control {
+    height:500px;
+}
