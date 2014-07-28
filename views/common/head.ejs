@@ -2,7 +2,7 @@
     <title><%= title %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="属于前端人自己的博客，关注前端相关技术，注重技术的落地">
-    <%if (keywords) {%>
+    <%if (Array.isArray(keywords)) {%>
         <%keywords = ',' + keywords.join(',');%>
     <%} else {%>
         <%keywords = '';%>
