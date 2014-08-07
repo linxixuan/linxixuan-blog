@@ -21,24 +21,44 @@ module.exports = function(app){
         var data = commonData,
             bname = req.query.bname;
 
-         marked.setOptions({
-             gfm: true,
-             tables: true,
-             breaks: true,
-             pedantic: false,
-             sanitize: false,
-             smartLists: true,
-             langPrefix: '',
-             highlight: function (code) {
-                return hljs.highlightAuto(code).value;
-             }
-         });
+        var highlight = function(code, lang){
+            var o;
+
+            if(lang == 'js') {
+                lang = 'javascript';
+            } else if (lang == 'html') {
+                lang = 'xml';
+            }
+
+            if(lang){
+                o = hljs.highlight(lang, code);
+            } else {
+                o = hljs.highlightAuto(code).value;
+            }
+            var html = o.value;
+            if(html){
+                return html;
+            } else {
+                return code;
+            }
+        };
+        marked.setOptions({
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            langPrefix: '',
+            highlight: highlight
+        });
 
         Blog.get({bid: bname}, function (blog) {
             if (blog[0]) {
                 blog = blog[0];
                 blog.day = blog.date.getFullYear() + '-' + (blog.date.getMonth() + 1) + '-' + blog.date.getDate();
-                blog.content = marked(blog.content);
+                content = blog.content.replace(/\\n/g, '\n');
+                blog.content = marked(content);
                 data.blog = blog;
                 res.render('blog/default', data);
             } else {
