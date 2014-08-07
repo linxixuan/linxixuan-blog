@@ -190,7 +190,7 @@ module.exports = function(app){
                     }
                 }
                 dateList.push(year + '年' + month + '月');
-                blogs[index].day = month + '-' + day;
+                blogs[index].day = (month + 1) + '-' + day;
                 blogs[index].year = year;
             }
             data.blogs = blogs;
