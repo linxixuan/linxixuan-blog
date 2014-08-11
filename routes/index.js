@@ -170,8 +170,12 @@ module.exports = function(app){
         if (query.hasOwnProperty('date')) {
             value = query['date'];
             beginDate = new Date(value.split('-')[0]);
-            endDate = new Date(value.split('-')[1]);
-            config = {date: {$lte: endDate, $gt: beginDate}};
+            if (value.indexOf('-') === -1) {
+                endDate = new Date(beginDate.getTime() + 24 * 60 * 60 * 1000);
+            } else {
+                endDate = new Date(value.split('-')[1]);
+            }
+            config = {date: {$lt: endDate, $gte: beginDate}};
         }
 
         Blog.get(config, function (blogs) {
@@ -189,7 +193,9 @@ module.exports = function(app){
                         tagList.push(tags[i]);
                     }
                 }
-                dateList.push(year + '年' + month + '月');
+                if (dateList.indexOf(year + '/' + (month + 1) + '/' + day) === -1) {
+                    dateList.push(year + '/' + (month + 1) + '/' + day);
+                }
                 blogs[index].day = (month + 1) + '-' + day;
                 blogs[index].year = year;
             }

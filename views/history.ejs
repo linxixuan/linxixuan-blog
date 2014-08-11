@@ -6,10 +6,11 @@
         <% include common/header %>
         <div class="body cf">
             <div class="content">
-                <ul class="filter cf">
-                    <li class="filter__item"><a class="J-tag" href="javascript:void(0);">时间</a></li>
-                    <li class="filter__item"><a class="J-tag" href="javascript:void(0);">标签</a></li>
-                </ul>
+                <div class="filter">
+                    <button type="button" class="btn btn-success J-popover" data-toggle="popover" title="标签" data-content="<% tagList.forEach(function (tag) { %><a class='btn' href='/history/?tag=<%= tag %>'><%= tag%></a><% }) %>">标签</button>
+                    <button type="button" class="btn btn-success J-popover" data-toggle="popover" title="时间" data-content="<% dateList.forEach(function (date) { %><a class='btn' href='/history/?date=<%= date %>-<%= date %>'><%= date %></a><% }) %>">时间</button>
+                    <a class="btn btn-success" href="/history">全部</a>
+                </div>
                 <div class="blog-list cf">
                     <% blogs.forEach(function (blog) { %>
                     <% var link = '/blog?bname=' + blog.bid; %>
@@ -30,5 +31,14 @@
             </aside>
         </div>
         <% include common/footer %>
+        <script>
+            $(function () {
+                $('.J-popover').popover({
+                    html: true,
+                    placement: 'bottom',
+                    trigger: 'focus'
+                });
+            });
+        </script>
     </body>
 </html>
