@@ -41,7 +41,7 @@ Blog.prototype.save = function (callback) {
 }
 
 Blog.get = function (config, callback) {
-    blogModel.find(config, function (err, blogs) {
+    blogModel.find(config).sort({date: -1}).exec(function (err, blogs) {
         if (err) {
             return callback(err);
         }
