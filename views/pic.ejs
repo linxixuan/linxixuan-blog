@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <% include common/head %>
+    </head>
+    <body class="pg-pic">
+        <% include common/header %>
+        <div class="body cf">
+            <div class="content">
+                <% if(foldList.length > 0) { %>
+                <div class="fold-list">
+                    <% foldList.forEach(function (fold) { %>
+                        <a class="fold" href="/pic?fold=<%= fold.name%>">
+                            <img src="<%= fold.firstPic%>" width="200" height="100" />
+                            <span><%= fold.name %></span>
+                        </a>
+                    <% }) %>
+                </div>
+                <% } %>
+                <% if(picList.length > 0) { %>
+                <div class="pic-list">
+                    <% picList.forEach(function(pic) { %>
+                        <a class="pic" href="javascript:void(0)">
+                            <img src="<%= pic.imgSrc%>" width="400" height="240" />
+                            <span><%= pic.name %></span>
+                        </a>
+                    <% }) %>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        <% include common/footer %>
+    </body>
+</html>
