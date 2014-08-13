@@ -508,20 +508,21 @@ aside .about .link img {
 }
 
 /* gallery */
-.fold {
+.pg-pic .content {
+    min-height:400px;
+}
+.pg-pic .fold {
     float:left;
     margin-right:30px;
     padding:10px 0 12px;
     background-color:#FFF;
     box-shadow:1px 1px 3px 1px #BBB;
 }
-
-.fold img {
+.pg-pic .fold img {
     display:block;
     padding:0 5px;
 }
-
-.fold span {
+.pg-pic .fold span {
     display:block;
     height:25px;
     line-height:25px;
@@ -530,11 +531,10 @@ aside .about .link img {
     color:#CF492E;
     box-shadow:0 3px 0 0 #FFF,0 4px 0 0 #bbb,0 6px 0 0 #FFF,0 7px 0 0 #BBB,0 9px 0 0 #FFF,0 10px 0 0 #BBB;
 }
-
-.fold:hover {
+.pg-pic .fold:hover {
     box-shadow:1px 1px 10px 3px #BBB;
 }
-.pic {
+.pg-pic .pic {
     float:left;
     margin:0 60px 30px 0;
     border:1px solid #AAA;
@@ -543,12 +543,11 @@ aside .about .link img {
     background-color:#FFF;
     box-shadow:1px 1px 3px 1px #BBB;
 }
-
-.pic img {
+.pg-pic .pic img {
     display:block;
 }
 
-.pic span {
+.pg-pic .pic span {
     display:block;
     height:60px;
     line-height:60px;
@@ -557,6 +556,6 @@ aside .about .link img {
     color:#CF492E;
 }
 
-.pic:hover {
+.pg-pic .pic:hover {
     box-shadow:1px 1px 10px 3px #BBB;
 }
