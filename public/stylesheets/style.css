@@ -24,7 +24,7 @@ body {
     margin:0;
     padding: 0;
     font-size:16px;
-    font-family:Georgia, 'Times New Roman', Times, 'Songti SC', SimSun, serif;
+    font-family:Georgia, 'Times New Roman', Times, 'Songti SC', 'Microsoft YaHei', SimSun, serif;
     font-weight:100;
     background:url(images/bg-shadow.png);
 }
@@ -524,10 +524,10 @@ aside .about .link img {
 }
 .pg-pic .fold span {
     display:block;
-    height:25px;
-    line-height:25px;
+    height:35px;
+    line-height:35px;
     text-align:center;
-    font-size:18px;
+    font-size:16px;
     color:#CF492E;
     box-shadow:0 3px 0 0 #FFF,0 4px 0 0 #bbb,0 6px 0 0 #FFF,0 7px 0 0 #BBB,0 9px 0 0 #FFF,0 10px 0 0 #BBB;
 }
