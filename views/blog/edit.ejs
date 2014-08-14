@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <% include ../common/head %>
+        <link rel='stylesheet' href='/stylesheets/highlight/github.css' />
     </head>
     <body class="pg-blog-edit">
         <% include ../common/header-simple %>
@@ -28,7 +29,36 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="提交" class="btn btn-default" />
+                <a href="javascript:void(0)" class="J-preview btn btn-success">预览</a>
             </div>
         </form>
+        <% include ../common/footer %>
+        <script>
+            $('.J-preview').on('click', function() {
+                var title = $('[name=title]').val(),
+                    content = $('[name=content]').val();
+                $.ajax({
+                    url: '/preview',
+                    type: 'post',
+                    data: {title: title, content: content}
+                }).done(function (res) {
+                    var post = 
+                    '<div class="modal fade" role="dialog" arial-labelleby="' + res.title + '" aria-hidden="true">' +
+                        '<div class="modal-dialog modal-lg">' +
+                            '<div class="modal-content">' +
+                                '<div class="modal-header"><h4 class="modal-title">' + res.title + '</h4></div>' +
+                                '<div class="modal-body">' +
+                                    '<div class="blog--large">' +
+                                        res.content +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                    $('body').append(post);
+                    $('.modal').modal('show');
+                });
+            });
+        </script>
     </body>
 </html>

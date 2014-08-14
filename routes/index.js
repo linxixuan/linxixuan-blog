@@ -10,6 +10,38 @@ var Blog = require('../models/blog'),
 
 var commonData;
 
+var highlight = function(code, lang){
+    var o;
+
+    if(lang == 'js') {
+        lang = 'javascript';
+    } else if (lang == 'html') {
+        lang = 'xml';
+    }
+
+    if(lang){
+        o = hljs.highlight(lang, code);
+    } else {
+        o = hljs.highlightAuto(code).value;
+    }
+    var html = o.value;
+    if(html){
+        return html;
+    } else {
+        return code;
+    }
+};
+marked.setOptions({
+    gfm: true,
+    tables: true,
+    breaks: true,
+    pedantic: false,
+    sanitize: false,
+    smartLists: true,
+    langPrefix: '',
+    highlight: highlight
+});
+
 module.exports = function(app){
 
     commonData = {
@@ -21,39 +53,6 @@ module.exports = function(app){
     app.get('/blog', function (req, res) {
         var data = commonData,
             bname = req.query.bname;
-
-        var highlight = function(code, lang){
-            var o;
-
-            if(lang == 'js') {
-                lang = 'javascript';
-            } else if (lang == 'html') {
-                lang = 'xml';
-            }
-
-            if(lang){
-                o = hljs.highlight(lang, code);
-            } else {
-                o = hljs.highlightAuto(code).value;
-            }
-            var html = o.value;
-            if(html){
-                return html;
-            } else {
-                return code;
-            }
-        };
-        marked.setOptions({
-            gfm: true,
-            tables: true,
-            breaks: true,
-            pedantic: false,
-            sanitize: false,
-            smartLists: true,
-            langPrefix: '',
-            highlight: highlight
-        });
-
         Blog.get({bid: bname}, function (blog) {
             if (blog[0]) {
                 blog = blog[0];
@@ -66,6 +65,15 @@ module.exports = function(app){
                 res.redirect('/');
             }
         });
+    });
+
+    // 博客预览
+    app.post('/preview', function (req, res) {
+        var content = req.body.content;
+        content = content.replace(/\\n/g, '\n');
+        content = marked(content);
+
+        res.json(200, {title: req.body.title, content: content});
     });
 
     // 提交博客

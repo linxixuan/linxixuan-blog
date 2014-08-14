@@ -3,12 +3,11 @@
     <% keywords = blog.tags; %>
     <% include ../common/head %>
         <link rel='stylesheet' href='/stylesheets/highlight/github.css' />
-        <script charset="utf-8" src="/javascripts/jquery-1.7.1.min.js"></script>
     </head>
     <body class="pg-blog">
         <% include ../common/header-simple %>
         <div class="body cf">
-            <div class="blog">
+            <div class="blog--large">
                 <h2 class="blog__title"><%- blog.title %></h2>
                 <div class="blog__content"><%- blog.content %></div>
                 <div class="blog__info">

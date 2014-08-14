@@ -234,25 +234,25 @@ aside .about .link img {
 .pg-blog {
     background:#FFF;
 }
-.pg-blog .blog {
+.blog--large {
     margin:0 0 20px;
     border-bottom:2px solid #999;
     padding:20px;
     width:100%;
 }
-.pg-blog .blog__title {
+.blog--large .blog__title {
     margin-bottom:30px;
     text-align:center;
     font-size:30px;
     color:#CF492E;
 }
-.pg-blog .blog__content {
+.blog--large .blog__content {
     line-height:30px;
 }
-.pg-blog .blog__content p {
+.blog--large .blog__content p {
     text-indent:2em;
 }
-.pg-blog .blog__info {
+.blog--large .blog__info {
     position:static;
     top:auto;
     bottom:auto;
@@ -264,14 +264,14 @@ aside .about .link img {
     color:#CCC;
 }
 
-.pg-blog .blog__info .date,
-.pg-blog .blog__info .tags {
+.blog--large .blog__info .date,
+.blog--large .blog__info .tags {
     margin:0 0 10px;
 }
-.pg-blog .blog__info .tags {
+.blog--large .blog__info .tags {
     margin:0;
 }
-.pg-blog .blog__info .tags__item {
+.blog--large .blog__info .tags__item {
     margin-right:10px;
 }
 
