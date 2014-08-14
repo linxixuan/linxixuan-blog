@@ -5,6 +5,7 @@
 var express = require('express');
     routes = require('./routes'),
     http = require('http'),
+    cookieParser = require('cookie-parser'),
     path = require('path');
 
 var app = express();
@@ -19,6 +20,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookieParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));

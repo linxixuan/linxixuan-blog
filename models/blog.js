@@ -1,5 +1,4 @@
-var crypto = require('crypto'),
-    mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/zmx');
 var Schema = mongoose.Schema;

@@ -2,6 +2,7 @@
  * GET home page.
  */
 var Blog = require('../models/blog'),
+    User = require('../models/user'),
     hljs = require('highlight.js'),
     fs = require('fs'),
     path = require('path'),
@@ -80,11 +81,8 @@ module.exports = function(app){
     });
 
     app.get('/blog/edit', function (req, res) {
-        var data = commonData,
-            cookie;
-        if(!req.header('Cookie')) res.redirect('../../login');
-        cookie = req.header('Cookie').split('=')
-        if (cookie.indexOf('uid') !== -1) {
+        var data = commonData;
+        if (req.cookies.uid) {
             res.render('blog/edit', data);
         } else {
             res.redirect('../../login');
@@ -126,14 +124,23 @@ module.exports = function(app){
     // 提交登录
     app.post('/login', function (req, res) {
         var account = req.body.account,
-            psw = req.body.password;
-        if (account === 'zmx6631356' && psw === '277475785') {
-            res.cookie('uid', account + '*' + psw, {maxAge: 1800});
-            res.render('blog/edit', commonData);
-        } else {
-            res.clearCookie('uid');
-            res.render('login', commonData);
-        }
+            psw = req.body.password,
+            isUser = false;
+        User.get({}, function(users) {
+            for (var i = 0, len = users.length; i < len; i++) {
+                if (account === users[i].account && psw === users[i].password) {
+                    isUser = true;
+                    break;
+                }
+            }
+            if (isUser) {
+                res.cookie('uid', account, {maxAge: 1800});
+                res.render('blog/edit', commonData);
+            } else {
+                res.clearCookie('uid');
+                res.render('login', commonData);
+            }
+        });
     });
 
     // 机器人文档

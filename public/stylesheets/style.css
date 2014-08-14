@@ -295,6 +295,7 @@ aside .about .link img {
     background:#EEE;
     opacity:.8;
     box-shadow:1px 1px 5px 1px #999;
+    outline:none;
 }
 .pg-history .filter__item:hover {
     opacity:1;
