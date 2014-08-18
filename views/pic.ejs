@@ -20,7 +20,7 @@
                 <div class="pic-list">
                     <% picList.forEach(function(pic) { %>
                         <a class="pic J-pic" href="javascript:void(0)">
-                            <img src="<%= pic.imgSrc%>" width="400" height="240" />
+                            <img src="<%= pic.imgSrc%>" data-width="<%= pic.width %>" data-height="<%= pic.height %>" width="400" height="<%= (400 * pic.height / pic.width).toFixed(0) %>" />
                             <span><%= pic.name %></span>
                         </a>
                     <% }) %>
@@ -32,8 +32,15 @@
         <script>
         $('.J-pic').on('click', function() {
             var imgSrc = $(this).find('img').attr('src'),
-            width = window.innerWidth * 0.8,
-            height = (width * 0.6).toFixed(2);
+                ratio = $(this).find('img').attr('data-height') / $(this).find('img').attr('data-width'),
+                width = window.innerWidth * 0.8,
+                height,
+                logicalHeight = parseInt(width * ratio, 10);
+
+            if (logicalHeight > window.innerHeight) {
+                height = window.innerHeight * 0.8;
+                width = parseInt(height / ratio, 10);
+            }
             var dialogContent = 
             '<div class="modal fade J-dialog" role="dialog" aria-hidden="true">' +
                 '<div class="modal-dialog modal-lg">' +

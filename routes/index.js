@@ -6,6 +6,7 @@ var Blog = require('../models/blog'),
     hljs = require('highlight.js'),
     fs = require('fs'),
     path = require('path'),
+    imgSize = require('image-size'),
     marked = require('marked');
 
 var commonData;
@@ -245,19 +246,24 @@ module.exports = function(app){
                     firstPic = 'gallery/' +  foldPaths[i] + '/' + firstPic;
                     foldList.push({
                         'name': foldPaths[i],
-                        'firstPic': firstPic
+                        'firstPic': firstPic,
                     });
                 }
             }
         } else {
-            var fold = req.query.fold;
+            var fold = req.query.fold,
+                dimension;
             picPaths = fs.readdirSync(galleryPath + '/' + fold);
             for (var i = 0,len = picPaths.length; i < len; i++) {
                 if (picPaths[i] !== '.DS_Store') {
+                    dimension = imgSize('public/gallery/' + fold + '/' + picPaths[i]);
+
                     picList.push({
                         'name': picPaths[i].replace(/\.\S+/g, ''),
-                        'imgSrc': 'gallery/' + fold + '/' + picPaths[i]
-                    })
+                        'imgSrc': 'gallery/' + fold + '/' + picPaths[i],
+                        'width': dimension.width,
+                        'height': dimension.height
+                    });
                 }
             }
         }
