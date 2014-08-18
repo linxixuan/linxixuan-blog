@@ -19,7 +19,7 @@
                 <% if(picList.length > 0) { %>
                 <div class="pic-list">
                     <% picList.forEach(function(pic) { %>
-                        <a class="pic" href="javascript:void(0)">
+                        <a class="pic J-pic" href="javascript:void(0)">
                             <img src="<%= pic.imgSrc%>" width="400" height="240" />
                             <span><%= pic.name %></span>
                         </a>
@@ -29,5 +29,29 @@
             </div>
         </div>
         <% include common/footer %>
+        <script>
+        $('.J-pic').on('click', function() {
+            var imgSrc = $(this).find('img').attr('src'),
+            width = window.innerWidth * 0.8,
+            height = (width * 0.6).toFixed(2);
+            var dialogContent = 
+            '<div class="modal fade J-dialog" role="dialog" aria-hidden="true">' +
+                '<div class="modal-dialog modal-lg">' +
+                    '<div class="modal-content">' +
+                        '<div class="modal-body">' +
+                            '<img src="' + imgSrc + '" width="' + width + '" height="' + height + '" />' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+            if ($('.J-dialog').length === 0) {
+                $('body').append(dialogContent);
+            } else {
+                $('.J-dialog').replaceWith(dialogContent);
+            }
+            $('.J-dialog').find('.modal-dialog').css('width', (width + 42) + 'px');
+            $('.modal').modal('show');
+        });
+        </script>
     </body>
 </html>
