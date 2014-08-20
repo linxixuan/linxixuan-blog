@@ -91,6 +91,10 @@ header .title {
     margin-top:-22px;
     -webkit-animation: hidden .5s ease-in .5s forwards;
     -webkit-backface-visibility:hidden;
+    -moz-animation: hidden .5s ease-in .5s forwards;
+    -moz-backface-visibility:hidden;
+    -ms-animation: hidden .5s ease-in .5s forwards;
+    -ms-backface-visibility:hidden;
 }
 
 .simple-header .title .avater img {
@@ -102,6 +106,12 @@ header .title {
     -webkit-backface-visibility:hidden;
     -webkit-transform:rotate3d(0,1,0,-180deg);
     -webkit-animation: show .5s ease-in .5s forwards;
+    -moz-backface-visibility:hidden;
+    -moz-transform:rotate3d(0,1,0,-180deg);
+    -moz-animation: show .5s ease-in .5s forwards;
+    -ms-backface-visibility:hidden;
+    -ms-transform:rotate3d(0,1,0,-180deg);
+    -ms-animation: show .5s ease-in .5s forwards;
 }
 
 header .nav {
@@ -587,9 +597,39 @@ aside .about .link img {
     box-shadow:1px 1px 10px 3px #BBB;
 }
 
-@keyframes hidden {
+@-webkit-keyframes show {
     from {
+        -webkit-transform:rotate3d(0,1,0,-180deg);
+    }
+
+    to {
         -webkit-transform:rotate3d(0,1,0,0deg);
+    }
+}
+
+@-ms-keyframes show {
+    from {
+        transform:rotate3d(0,1,0,-180deg);
+    }
+
+    to {
+        transform:rotate3d(0,1,0,0deg);
+    }
+}
+
+@-moz-keyframes show {
+    from {
+        -moz-transform:rotate3d(0,1,0,-180deg);
+    }
+
+    to {
+        -moz-transform:rotate3d(0,1,0,0deg);
+    }
+}
+
+@-webkit-keyframes hidden {
+    from {
+        -webkit-transform:rotate3d(0,1,0,0);
     }
 
     to {
@@ -597,12 +637,22 @@ aside .about .link img {
     }
 }
 
-@keyframes show {
+@-ms-keyframes hidden {
     from {
-        -webkit-transform:rotate3d(0,1,0,-180deg);
+        transform:rotate3d(0,1,0,0);
     }
 
     to {
-        -webkit-transform:rotate3d(0,1,0,0deg);
+        transform:rotate3d(0,1,0,180deg);
+    }
+}
+
+@-moz-keyframes hidden {
+    from {
+        -moz-transform:rotate3d(0,1,0,0);
+    }
+
+    to {
+        -moz-transform:rotate3d(0,1,0,180deg);
     }
 }
