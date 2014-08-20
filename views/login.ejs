@@ -18,6 +18,9 @@
                         <input type="password" class="field__input" name="password" />
                     </div>
                     <div class="field">
+                        <% if (bname) { %>
+                            <input type="hidden" value="<%= bname %>" name="bname" />
+                        <% } %>
                         <input type="submit" class="btn" value="提交" />
                     </div>
                 </form>

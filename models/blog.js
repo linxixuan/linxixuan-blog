@@ -23,7 +23,7 @@ function Blog(blog) {
     this.content = blog.content;
     this.tags = blog.tags.split(',');
     this.date = blog.date;
-}
+};
 
 Blog.prototype.save = function (callback) {
     var blog = {
@@ -36,8 +36,10 @@ Blog.prototype.save = function (callback) {
     };
 
     var instance = new blogModel(blog);
-    instance.save();
-}
+    instance.save(function () {
+        callback();
+    });
+};
 
 Blog.get = function (config, callback) {
     blogModel.find(config).sort({date: -1}).exec(function (err, blogs) {
@@ -46,6 +48,13 @@ Blog.get = function (config, callback) {
         }
         callback(blogs);
     });
-}
+};
+
+Blog.update = function (config, instance) {
+    blogModel.update(config, instance, function (err, numberAffected, raw) {
+        if (err) conosle.log(err);
+         console.log('The number of updated documents was %d', numberAffected);
+    });
+};
 
 module.exports = Blog;

@@ -80,21 +80,35 @@ module.exports = function(app){
     // 提交博客
     app.post('/blog', function (req, res) {
         var blogReq = req.body,
+            isUpdate = req.body.method === 'update',
             blog;
 
         blogReq.date = new Date();
         blog = new Blog(blogReq);
-
-        blog.save();
+        if (!isUpdate) {
+            blog.save(function () {
+            });
+        } else {
+            Blog.update({bid: blog.bid}, blog);
+        }
         res.redirect('/');
     });
 
     app.get('/blog/edit', function (req, res) {
-        var data = commonData;
+        var data = commonData,
+            bname = req.query.bname;
         if (req.cookies.uid) {
-            res.render('blog/edit', data);
+            if (bname) {
+                Blog.get({bid: bname}, function (blog) {
+                    data.blog = blog[0];
+                    res.render('blog/edit', data);
+                });
+            } else {
+                data.blog = null;
+                res.render('blog/edit', data);
+            }
         } else {
-            res.redirect('../../login');
+            res.redirect('../../login?bname=' + req.query.bname);
         }
     });
 
@@ -127,6 +141,8 @@ module.exports = function(app){
     // 登录页
     app.get('/login', function (req, res) {
         var data = commonData;
+
+        data.bname = req.query.bname;
         res.render('login', data);
     });
 
@@ -134,7 +150,8 @@ module.exports = function(app){
     app.post('/login', function (req, res) {
         var account = req.body.account,
             psw = req.body.password,
-            isUser = false;
+            isUser = false,
+            bname = req.body.bname;
         User.get({}, function(users) {
             for (var i = 0, len = users.length; i < len; i++) {
                 if (account === users[i].account && psw === users[i].password) {
@@ -143,10 +160,13 @@ module.exports = function(app){
                 }
             }
             if (isUser) {
-                res.cookie('uid', account, {maxAge: 1800});
-                res.render('blog/edit', commonData);
+                res.cookie('uid', account, {maxAge: 900000});
+                if (bname) {
+                    res.redirect('../blog/edit?bname=' + bname);
+                } else {
+                    res.redirect('../blog/edit');
+                }
             } else {
-                res.clearCookie('uid');
                 res.render('login', commonData);
             }
         });

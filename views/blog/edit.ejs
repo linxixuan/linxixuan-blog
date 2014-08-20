@@ -9,26 +9,51 @@
             <h1>编写博客</h1>
             <div class="form-group form-group--short">
                 <label>url：</label>
+                <% if (blog) { %>
+                <input class="form-control" value="<%- blog.bid%>" name="index" type="text" />
+                <% } else { %>
                 <input class="form-control" name="index" type="text" />
+                <% } %>
             </div>
             <div class="form-group form-group--short">
                 <label>标题：</label>
+                <% if (blog) { %>
+                <input class="form-control" value="<%- blog.title%>" name="title" type="text" />
+                <% } else { %>
                 <input class="form-control" class="text" type="text" name="title" />
+                <% } %>
             </div>
             <div class="form-group form-group--short">
                 <label>标签：</label>
+                <% if (blog) { %>
+                <input class="form-control" type="input" value="<%- blog.tags %>" name="tags" />
+                <% } else { %>
                 <input class="form-control" type="input" name="tags" />
+                <% } %>
             </div>
             <div class="form-group form-group--summary">
                 <label>概要：</label>
+                <% if (blog) { %>
+                <textarea name="summary" class="form-control J-summary"><%- blog.summary %></textarea>
+                <% } else { %>
                 <textarea name="summary" class="form-control J-summary"></textarea>
+                <% } %>
             </div>
             <div class="form-group form-group--context">
                 <label>正文：</label>
+                <% if (blog) { %>
+                <textarea name="content" class="J-content form-control"><%- blog.content %></textarea>
+                <% } else { %>
                 <textarea name="content" class="J-content form-control"></textarea>
+                <% } %>
             </div>
             <div class="form-group">
+                <% if (blog) { %>
+                <input type="hidden" value="update" name="method" value="update" />
+                <input type="submit" value="更新" class="btn btn-default" />
+                <% } else { %>
                 <input type="submit" value="提交" class="btn btn-default" />
+                <% } %>
                 <a href="javascript:void(0)" class="J-preview btn btn-success">预览</a>
             </div>
         </form>
