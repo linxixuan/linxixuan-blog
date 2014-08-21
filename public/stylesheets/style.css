@@ -656,3 +656,19 @@ aside .about .link img {
         -moz-transform:rotate3d(0,1,0,180deg);
     }
 }
+
+.pg-404 {
+    background:#FFF;
+}
+.pg-404 .jumbotron {
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-315px;
+    margin-top:-313px;
+    background:#FFF;
+}
+.pg-404 .hinge {
+    -webkit-animation:hinge 1.6s ease-in forwards;
+    animation:hinge 1.6s .5s ease-in forwards;
+}

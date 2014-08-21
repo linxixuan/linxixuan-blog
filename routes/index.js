@@ -293,4 +293,11 @@ module.exports = function(app){
         data.picList = picList;
         res.render('pic', data);
     });
+
+    // 404
+    app.use(function(req, res, next) {
+        res.status(404);
+
+        res.render('404', commonData);
+    });
 };
