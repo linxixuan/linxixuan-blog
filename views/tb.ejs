@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <% include common/head %>
+        <link rel='stylesheet' href='/stylesheets/animate.css' />
+    </head>
+    <body class="pg-tb">
+        <header><h1>TB助手</h1></header>
+        <div class="content clearfix">
+            <div class="editor">
+                <div class="form-group">
+                    <label for="link">链接：</label>
+                    <input id="link" class="J-url form-control" type="text" placeholder="请填入TB方案的链接..."/>
+                </div>
+                <div class="form-group">
+                    <label for="remark">备注：</label>
+                    <textarea row="3" id="remark" class="J-remark form-control" type="text" placeholder="推荐使用markdown格式"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags">标签：</label>
+                    <input type="text" class="J-tags form-control" type="text" placeholder="每个方案的类型，多个类型使用“|”分隔" />
+                </div>
+                <div class="form-group">
+                    <a href="javascript:void(0);" class="J-gen btn btn-primary">生成</a>
+                </div>
+            </div>
+            <div class="sperator"></div>
+            <div class="viewer">
+                <form action="tb" method="POST">
+                    <div class="form-group">
+                        <label for="group">小组：</label>
+                        <input id="group" class="J-group form-control" name="group" type="text" placeholder="TB小组..."/>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">时间：</label>
+                        <input id="time" class="J-time form-control" type="text" name="time" placeholder="格式：YYYY/MM"/>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="发布"/>
+                    <div class="J-plan-wrapper plan-wrapper">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="/javascripts/jquery-1.11.1.min.js"></script>
+        <script>
+            $(function () {
+                $('.content').css('height', parseInt(window.innerHeight, 10) - 108);
+                $(window).resize(function () {
+                    $('.content').css('height', parseInt(window.innerHeight, 10) - 107);
+                });
+
+                // 生成
+                $('.J-gen').on('click', function () {
+                    var tpl = 
+                    '<div class="plan">' +
+                        '<input type="hidden" name="plans[]" value="{url}&{remark}&{tags}" />' +
+                    '<div class="text">' +
+                    '<a class="url" href="http://{url}">{url}</a>' +
+                    '<span class="remark">{remark}</span>' +
+                    '<ul class="tags clearfix">' +
+                    '{tagList}' +
+                    '</ul>' +
+                    '</div>' +
+                    '</div>',
+                    url = $('.editor .J-url').val(),
+                    remark = $('.editor .J-remark').val(),
+                    tags = $('.editor .J-tags').val(),
+                    tagArr =tags.split('|'),
+                    tagList = '';
+
+                    for (var i = 0,len = tagArr.length; i < len; i++) {
+                        tagList += '<li>' + tagArr[i] + '</li>';
+                    }
+
+                    var config = {
+                        url: url,
+                        remark: remark,
+                        tags: tags,
+                        tagList: tagList
+                    }
+
+                    for (var p in config) {
+                        var pattern = new RegExp('{' + p + '}', 'g');
+                        tpl = tpl.replace(pattern, config[p]);
+                    }
+
+                    $('.J-plan-wrapper').append(tpl);
+                    $('.form-control').val('');
+                });
+            });
+        </script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-52795084-1', 'zmx.im');
+          ga('send', 'pageview');
+        </script>
+    </body>
+</html>

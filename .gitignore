@@ -1,4 +1,5 @@
 test/
 node_modules/
-*.sw*
+.*.sw*
+*/.*.sw*
 *.DS_Store

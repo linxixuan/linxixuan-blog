@@ -3,6 +3,7 @@
  */
 var Blog = require('../models/blog'),
     User = require('../models/user'),
+    TeamBuilding = require('../models/teambuilding'),
     hljs = require('highlight.js'),
     fs = require('fs'),
     path = require('path'),
@@ -292,6 +293,28 @@ module.exports = function(app){
         data.foldList = foldList;
         data.picList = picList;
         res.render('pic', data);
+    });
+
+    app.get('/tb', function (req, res) {
+        var params = req.query,
+            group = req.query.group,
+            time = req.query.time;
+
+        if (group !== '' && time !== '') {
+            // 页面渲染需要设定投票结束
+            //res.render('tbresult.ejs', commonData);
+        } else {
+            res.render('tb.ejs', commonData);
+        }
+    });
+
+    app.post('/tb', function (req, res) {
+        var tb = new TeamBuilding(req.body),
+            group = req.body.group,
+            time = req.body.time;
+        tb.save(function () {
+            res.redirect('/tb/?group=' + group + '&time=' + time);
+        });
     });
 
     // 404
