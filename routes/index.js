@@ -8,6 +8,7 @@ var Blog = require('../models/blog'),
     fs = require('fs'),
     path = require('path'),
     imgSize = require('image-size'),
+    crypto = require('crypto'),
     marked = require('marked');
 
 var commonData;
@@ -315,6 +316,33 @@ module.exports = function(app){
         tb.save(function () {
             res.redirect('/tb/?group=' + group + '&time=' + time);
         });
+    });
+
+    app.get('/weixin', function (req,res) {
+
+        if (check(req)) {
+            res.send(req.echostr);
+        };
+        
+        function check(req) {
+            var signature = req.signature,
+                timestamp = req.timestamp,
+                nonce = req.nonce,
+                TOKEN = 'wazml';
+
+            var shasum = crypto.createHash('sha1');
+
+            tmpArr = [TOKEN, timestamp, nonce];
+            tmpArr.sort();
+            tmpArr.join('');
+            $tmpStr = shasum( $tmpStr );
+
+            if( tmpStr == signature ){
+                return true;
+            }else{
+                return false;
+            }
+        }
     });
 
     // 404
