@@ -6,7 +6,7 @@ var Blog = require('../models/blog'),
     TeamBuilding = require('../models/teambuilding'),
     hljs = require('highlight.js'),
     fs = require('fs'),
-    js2xml = require('obj2xml'),
+    o2x = require('object-to-xml'),
     path = require('path'),
     imgSize = require('image-size'),
     crypto = require('crypto'),
@@ -353,17 +353,18 @@ module.exports = function(app){
 
         if (type.indexOf('text') >= 0) {
             msgObj = {
-                ToUserName: '![CDATA[' + data.touser + ']]',
-                FromUserName: '![CDATA[' + data.fromuser + ']]',
-                CreateTime: data.createtime,
-                MsgType: '![CDATA[' + data.msgtype + ']]',
-                Content: '![CDATA[hello]]'
+                xml: {
+                    ToUserName: '![CDATA[' + data.touser + ']]',
+                    FromUserName: '![CDATA[' + data.fromuser + ']]',
+                    CreateTime: data.createtime,
+                    MsgType: '![CDATA[' + data.msgtype + ']]',
+                    Content: '![CDATA[hello]]'
+                 }
             };
         }
 
-        conosle.log(msgObj);
-        response.set('Content-Type', 'text/xml');
-        response.send(js2xml.convert(msgObj));
+        res.set('Content-Type', 'text/xml');
+        res.send(js2xml.convert(msgObj));
     });
     // 404
     app.use(function(req, res, next) {
