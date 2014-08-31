@@ -6,6 +6,7 @@ var Blog = require('../models/blog'),
     TeamBuilding = require('../models/teambuilding'),
     hljs = require('highlight.js'),
     fs = require('fs'),
+    js2xml = require('obj2xml'),
     path = require('path'),
     imgSize = require('image-size'),
     crypto = require('crypto'),
@@ -348,34 +349,21 @@ module.exports = function(app){
     app.post('/weixin', function(req, res) {
         var data = req.body.xml,
             type = data.msgtype,
-            msgObj = {},
-            resultMsg;
+            msgObj = {};
 
-        resultMsg =
-        '<xml>' +
-        '   <ToUserName><![CDATA[{touser}]]></ToUserName>' +
-        '   <FromUserName><![CDATA[{fromuser}]]></FromUserName>' +
-        '   <CreateTime>{createtime}</CreateTime>' +
-        '   <MsgType><![CDATA[{msgtyp}]]></MsgType>' +
-        '   <Content><![CDATA[{content}]]></Content>' +
-        '</xml>';
-
-        if (type === 'text') {
+        if (type.indexOf('text') >= 0) {
             msgObj = {
-                touser: data.touser,
-                fromuser: data.fromuser,
-                createtime: data.createtime,
-                msgtype: data.msgtype,
-                content: 'hello'
+                ToUserName: '![CDATA[' + data.touser + ']]',
+                FromUserName: '![CDATA[' + data.fromuser + ']]',
+                CreateTime: data.createtime,
+                MsgType: '![CDATA[' + data.msgtype + ']]',
+                Content: '![CDATA[hello]]'
             };
         }
 
-        for(var p in msgObj) {
-            resultMsg = resultMsg.replace(new RegExp('{' + p + '}'), msgObj[p]);
-        }
-
-        conosle.log(resultMsg);
-        res.send('');
+        conosle.log(msgObj);
+        response.set('Content-Type', 'text/xml');
+        response.send(js2xml.convert(msgObj));
     });
     // 404
     app.use(function(req, res, next) {
