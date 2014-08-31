@@ -319,23 +319,23 @@ module.exports = function(app){
     });
 
     app.get('/weixin', function (req,res) {
-
         if (check(req)) {
-            res.send(req.echostr);
+            res.send(req.query.echostr);
         };
-        
+
         function check(req) {
-            var signature = req.signature,
-                timestamp = req.timestamp,
-                nonce = req.nonce,
-                TOKEN = 'wazml';
+            var signature = req.query.signature,
+            timestamp = req.query.timestamp,
+            nonce = req.query.nonce,
+            TOKEN = 'wazml';
 
             var shasum = crypto.createHash('sha1');
 
             tmpArr = [TOKEN, timestamp, nonce];
             tmpArr.sort();
-            tmpArr.join('');
-            $tmpStr = shasum( $tmpStr );
+            tmpStr = tmpArr.join('');
+            shasum.update(tmpStr);
+            tmpStr =  shasum.digest('hex');
 
             if( tmpStr == signature ){
                 return true;
