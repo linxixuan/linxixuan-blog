@@ -364,7 +364,7 @@ module.exports = function(app){
         }
 
         res.set('Content-Type', 'text/xml');
-        res.send(js2xml.convert(msgObj));
+        res.send(o2x(msgObj));
     });
     // 404
     app.use(function(req, res, next) {
