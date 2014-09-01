@@ -3,6 +3,7 @@
  */
 var Blog = require('../models/blog'),
     User = require('../models/user'),
+    User = require('../models/track'),
     TeamBuilding = require('../models/teambuilding'),
     hljs = require('highlight.js'),
     fs = require('fs'),
@@ -347,7 +348,33 @@ module.exports = function(app){
 
     app.post('/weixin', function(req, res) {
         var data = req.body.xml,
-            type = data.msgtype;
+            content = data.content[0].split('-'),
+            type = content.shift(),
+            info = content.join('-');
+
+        var RUN = 'r',
+            WEIGHT = 'w',
+            PUSH = 'p';
+    
+        switch(type) {
+        case RUN:
+            type = 'run';
+            break;
+        case WEIGHT:
+            type = 'weight';
+            break;
+        default:
+            type = 'push';
+        }
+
+
+        track = new Track({
+            info: info,
+            time: data.createtime[0],
+            type: type
+        });
+        
+        track.save();
 
         msg = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>主人，收到</Content></xml>';
         
