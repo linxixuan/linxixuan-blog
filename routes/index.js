@@ -6,7 +6,6 @@ var Blog = require('../models/blog'),
     TeamBuilding = require('../models/teambuilding'),
     hljs = require('highlight.js'),
     fs = require('fs'),
-    o2x = require('object-to-xml'),
     path = require('path'),
     imgSize = require('image-size'),
     crypto = require('crypto'),
@@ -348,23 +347,11 @@ module.exports = function(app){
 
     app.post('/weixin', function(req, res) {
         var data = req.body.xml,
-            type = data.msgtype,
-            msgObj = {};
+            type = data.msgtype;
 
-        if (type.indexOf('text') >= 0) {
-            msgObj = {
-                xml: {
-                    ToUserName: '![CDATA[' + data.touser + ']]',
-                    FromUserName: '![CDATA[' + data.fromuser + ']]',
-                    CreateTime: data.createtime,
-                    MsgType: '![CDATA[' + data.msgtype + ']]',
-                    Content: '![CDATA[hello]]'
-                 }
-            };
-        }
-
-        res.set('Content-Type', 'text/xml');
-        res.send(o2x(msgObj));
+        msg = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>主人，收到</Content></xml>';
+        
+        res.send(msg);
     });
     // 404
     app.use(function(req, res, next) {
