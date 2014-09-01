@@ -747,3 +747,8 @@ aside .about .link img {
 .pg-tb .viewer .tags li:before {
     content:'';
 }
+
+.pg-track .content {
+    margin:0 auto;
+    width:980px;
+}

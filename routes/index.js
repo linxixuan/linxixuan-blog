@@ -352,7 +352,7 @@ module.exports = function(app){
             type = content.shift(),
             info = content.join('-');
 
-        if (!!type && data.fromeusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
+        if (type && data.fromeusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
             var RUN = 'r',
                 WEIGHT = 'w',
                 PUSH = 'p';
@@ -377,7 +377,7 @@ module.exports = function(app){
             });
             
             track.save(function () {
-                msg = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>主人，收到</Content></xml>';
+                msg = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>' + content + ':数据已保存</Content></xml>';
                 
                 res.send(msg);
             });
@@ -386,6 +386,17 @@ module.exports = function(app){
         msg = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>主人，收到</Content></xml>';
         
         res.send(msg);
+    });
+
+    // 获取追踪数据
+    app.use(function(req, res) {
+        Track.get({}, function (tracks) {
+            console.log(tracks.length);
+            var data = commonData;
+            data.track = tracks;
+            
+            res.render('track', data);
+        });
     });
     // 404
     app.use(function(req, res, next) {
