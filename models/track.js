@@ -13,9 +13,9 @@ var trackSchema = new Schema({
 trackModel = mongoose.model('Track', trackSchema);
 
 function Track(track) {
-    this.time = blog.time;
-    this.info = blog.info;
-    this.type = blog.type;
+    this.time = track.time;
+    this.info = track.info;
+    this.type = track.type;
 }
 
 Track.get = function (config, callback) {
