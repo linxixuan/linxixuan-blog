@@ -352,7 +352,7 @@ module.exports = function(app){
             type = content.shift(),
             info = content.join('-');
 
-        if (type && data.fromeusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
+        if (type && data.fromusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
             var RUN = 'r',
                 WEIGHT = 'w',
                 PUSH = 'p';
