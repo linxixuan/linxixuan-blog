@@ -352,7 +352,7 @@ module.exports = function(app){
             type = content.shift(),
             info = content.join('-');
 
-        if (!!type) {
+        if (!!type && data.fromeusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
             var RUN = 'r',
                 WEIGHT = 'w',
                 PUSH = 'p';
@@ -372,7 +372,8 @@ module.exports = function(app){
             track = new Track({
                 info: info,
                 time: data.createtime[0],
-                type: type
+                type: type,
+                name: 'linxixuan',
             });
             
             track.save(function () {

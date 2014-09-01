@@ -6,6 +6,7 @@ var trackSchema = new Schema({
     time: String, 
     info: String,
     type: String,
+    name: String,
 },{
     collection: 'track'
 });
@@ -16,6 +17,7 @@ function Track(track) {
     this.time = track.time;
     this.info = track.info;
     this.type = track.type;
+    this.name = track.name;
 }
 
 Track.get = function (config, callback) {
@@ -32,6 +34,7 @@ Track.prototype.save = function (callback) {
         info: this.info,
         time: this.time,
         type: this.type,
+        name: this.name,
     };
 
     var instance = new trackModel(track);
