@@ -63,7 +63,7 @@
                 var title = $('[name=title]').val(),
                     content = $('[name=content]').val();
                 $.ajax({
-                    url: '/preview',
+                    url: '/blog/preview',
                     type: 'post',
                     data: {title: title, content: content}
                 }).done(function (res) {

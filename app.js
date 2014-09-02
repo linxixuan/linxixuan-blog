@@ -3,8 +3,8 @@
  */
 
 var express = require('express');
-    routes = require('./routes'),
     http = require('http'),
+    fs = require('fs'),
     xmlparser = require('express-xml-bodyparser'),
     cookieParser = require('cookie-parser'),
     path = require('path');
@@ -36,4 +36,9 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-routes(app);
+fs.readdirSync('./controllers').forEach(function (file) {
+    if(file.substr(-3) == '.js') {
+        route = require('./controllers/' + file);
+        route(app);
+    }
+});
