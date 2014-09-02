@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html>
     <% include common/head %>
+    <link rel='stylesheet' href='/stylesheets/animation.css' />
     </head>
     <body class="pg-track">
         <% include common/header-simple %>
         <div class="content">
-            <canvas id="trackChart" width=980px height=300px;></canvas>
+            <% for(var p in datasets) { %>
+                <% if(datasets.hasOwnProperty(p)) { %>
+                <h3 class="canvas-header flipInX"><%= p %></h3>
+                <canvas id="trackChart-<%= p %>" width=980px height=300px;></canvas>
+                <% } %>
+            <% } %>
         </div>
         <% include common/footer %>
         <script src="/javascripts/Chart.min.js"></script>
         <script type="text/javascript">
-            var data = { 
-                labels : [<% track.forEach(function(data) {%>
-                    <%= data.time %>,
-                <%})%>],
-                datasets : [{
-                    fillColor : "rgba(151,187,205,0.5)",
-                    strokeColor : "rgba(151,187,205,1)",
-                    pointColor : "rgba(151,187,205,1)",
-                    pointStrokeColor : "#fff",
-                    data: [
-                    <% track.forEach(function(data) {%>
-                        <%= data.info %>,
-                    <%})%>
-                    ]
-                }]
-            };
-            var ctx = $("#trackChart").get(0).getContext("2d");
-            var myNewChart = new Chart(ctx);
-            myNewChart.Line(data);
+            var data,
+                ctx,
+                myNewChart;
+            <% for(var p in datasets) { %>
+                <% if(datasets.hasOwnProperty(p)) { %>
+                    data = { 
+                        labels :
+                        [<% datasets[p].forEach(function(data) {%>
+                            "<%= data.time %>",
+                        <%})%>],
+                        datasets :
+                        [{
+                            labels: "<%= p %>",
+                            fillColor : "rgba(151,187,205,0.5)",
+                            strokeColor : "rgba(151,187,205,1)",
+                            pointColor : "rgba(151,187,205,1)",
+                            pointStrokeColor : "#fff",
+                            data:
+                            [<% datasets[p].forEach(function(data) {%>
+                                <%= data.info %>,
+                            <%})%>]
+                        }]
+                    };
+                    ctx = $("#trackChart-<%= p %>").get(0).getContext("2d");
+                    myNewChart = new Chart(ctx);
+                    myNewChart.Line(data);
+                <% } %>
+            <% } %>
+            setTimeout(function () {
+                $('.canvas-header').addClass('animated flipInX');        
+            }, 1000);
         </script>
     </body>
 </html>

@@ -752,3 +752,8 @@ aside .about .link img {
     margin:0 auto;
     width:980px;
 }
+
+.pg-track .content {
+    font-family:Verdana;
+    color:#2980B9;
+}

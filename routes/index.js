@@ -368,7 +368,6 @@ module.exports = function(app){
                 type = 'push';
             }
 
-
             track = new Track({
                 info: info,
                 time: data.createtime[0],
@@ -389,12 +388,32 @@ module.exports = function(app){
     });
 
     // 获取追踪数据
-    app.use(function(req, res) {
+    app.get('/track', function(req, res) {
         Track.get({}, function (tracks) {
-            console.log(tracks.length);
-            var data = commonData;
-            data.track = tracks;
+            var data = commonData,
+                typeArr = [],
+                datasets = {};
             
+            // 分类统计信息
+            for (var i = 0, len = tracks.length; i < len; i++) {
+                if (typeArr.indexOf(tracks[i].type) === -1) {
+                    typeArr.push(tracks[i].type);
+                    datasets[tracks[i].type] = [];
+                }
+
+                var tmp = new Date(tracks[i].time * 1000);
+                switch(tracks[i].type) {
+                case 'weight': // 精确到小时
+                    tracks[i].time = tmp.getFullYear() + '/' + (tmp.getMonth() + 1) + '/' + tmp.getDate() + ' ' + tmp.getHours() + ':' + tmp.getMinutes();
+                    break;
+                 default: // 精确到天
+                    tracks[i].time = tmp.getFullYear() + '/' + (tmp.getMonth() + 1) + '/' + tmp.getDate();
+                }
+                datasets[tracks[i].type].push(tracks[i]);
+            }
+            console.log(datasets);
+            
+            data.datasets = datasets;
             res.render('track', data);
         });
     });
