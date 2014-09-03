@@ -80,7 +80,9 @@
                             '</div>' +
                         '</div>' +
                     '</div>';
-                    $('body').append(post);
+                    if ($('.modal').length === 0) {
+                        $('body').append(post);
+                    }
                     $('.modal').modal('show');
                 });
             });

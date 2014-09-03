@@ -20,6 +20,8 @@ module.exports = function(app){
         Track.get({}, function (tracks) {
             var data = commonData,
                 typeArr = [],
+                timeStamp,
+                len,
                 datasets = {};
             
             // 分类统计信息
@@ -29,17 +31,32 @@ module.exports = function(app){
                     datasets[tracks[i].type] = [];
                 }
 
-                var tmp = new Date(tracks[i].time * 1000);
-                switch(tracks[i].type) {
-                case 'weight': // 精确到小时
-                    tracks[i].time = tmp.getFullYear() + '/' + (tmp.getMonth() + 1) + '/' + tmp.getDate() + ' ' + tmp.getHours() + ':' + tmp.getMinutes();
-                    break;
-                 default: // 精确到天
-                    tracks[i].time = tmp.getFullYear() + '/' + (tmp.getMonth() + 1) + '/' + tmp.getDate();
+                /**
+                 * 时间处理
+                 */
+                timeStamp = new Date(tracks[i].time * 1000);
+                if (tracks[i].type === 'weight') {
+                    tracks[i].time = timeStamp.getFullYear() + '/' + (timeStamp.getMonth() + 1) + '/' + timeStamp.getDate() + ' ' + timeStamp.getHours() + ':' + timeStamp.getMinutes();
+                } else {
+                    tracks[i].time = timeStamp.getFullYear() + '/' + (timeStamp.getMonth() + 1) + '/' + timeStamp.getDate();
+                }
+
+                // 保证某个时间点只有一个数据，且后面的数据要覆盖旧数据
+                len = datasets[tracks[i].type].length;
+                if (len >= 1 && datasets[tracks[i].type][len - 1].time === tracks[i].time) {
+                    datasets[tracks[i].type].pop();
+                }
+                /**
+                 * 数据处理
+                 */
+                if (tracks[i].type === 'run') {
+                    var tmp = tracks[i].info.split('-');
+                    tracks[i] = [];
+                    tracks[1].push(tmp[0]); // 时间
+                    tracks[0].push(tmp[1]); // 里程
                 }
                 datasets[tracks[i].type].push(tracks[i]);
             }
-            console.log(datasets);
             
             data.datasets = datasets;
             res.render('track', data);
