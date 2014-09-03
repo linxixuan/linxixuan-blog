@@ -19,46 +19,41 @@ module.exports = function(app){
     app.get('/track', function(req, res) {
         Track.get({}, function (tracks) {
             var data = commonData,
-                typeArr = [],
                 timeStamp,
-                len,
-                datasets = {};
+                personalInfo = {},
+                type,
+                rawData;
             
             // 分类统计信息
             for (var i = 0, len = tracks.length; i < len; i++) {
-                if (typeArr.indexOf(tracks[i].type) === -1) {
-                    typeArr.push(tracks[i].type);
-                    datasets[tracks[i].type] = [];
+                type = tracks[i].type;
+                if (!personalInfo[type]) {
+                    personalInfo[type] = {
+                        time: [],
+                        datasets: []
+                    }
                 }
 
                 /**
                  * 时间处理
                  */
                 timeStamp = new Date(tracks[i].time * 1000);
-                if (tracks[i].type === 'weight') {
-                    tracks[i].time = timeStamp.getFullYear() + '/' + (timeStamp.getMonth() + 1) + '/' + timeStamp.getDate() + ' ' + timeStamp.getHours() + ':' + timeStamp.getMinutes();
+                if (type === 'weight') {
+                    personalInfo[type].time.push(timeStamp.getFullYear() + '/' + (timeStamp.getMonth() + 1) + '/' + timeStamp.getDate() + ' ' + timeStamp.getHours() + ':' + timeStamp.getMinutes());
                 } else {
-                    tracks[i].time = timeStamp.getFullYear() + '/' + (timeStamp.getMonth() + 1) + '/' + timeStamp.getDate();
+                    personalInfo[type].time.push(timeStamp.getFullYear() + '/' + (timeStamp.getMonth() + 1) + '/' + timeStamp.getDate());
                 }
 
-                // 保证某个时间点只有一个数据，且后面的数据要覆盖旧数据
-                len = datasets[tracks[i].type].length;
-                if (len >= 1 && datasets[tracks[i].type][len - 1].time === tracks[i].time) {
-                    datasets[tracks[i].type].pop();
+                rawData = tracks[i].info.split('-');
+                for (var j = 0; j < rawData.length; j++) {
+                    if (!personalInfo[type].datasets[j]) {
+                        personalInfo[type].datasets[j] = [];
+                    }
+                    personalInfo[type].datasets[j].push(rawData[j]);
                 }
-                /**
-                 * 数据处理
-                 */
-                if (tracks[i].type === 'run') {
-                    var tmp = tracks[i].info.split('-');
-                    tracks[i] = [];
-                    tracks[1].push(tmp[0]); // 时间
-                    tracks[0].push(tmp[1]); // 里程
-                }
-                datasets[tracks[i].type].push(tracks[i]);
             }
-            
-            data.datasets = datasets;
+            console.log(personalInfo);
+            data.personalInfo = personalInfo;
             res.render('track', data);
         });
     });
@@ -96,39 +91,41 @@ module.exports = function(app){
             type = content.shift(),
             info = content.join('-');
 
-        if (type && data.fromusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
-            var RUN = 'r',
-                WEIGHT = 'w',
-                PUSH = 'p';
-        
-            switch(type) {
-            case RUN:
-                type = 'run';
-                break;
-            case WEIGHT:
-                type = 'weight';
-                break;
-            default:
-                type = 'push';
-            }
+        var msgTpl = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>{content}</Content></xml>';
 
-            track = new Track({
-                info: info,
-                time: data.createtime[0],
-                type: type,
-                name: 'linxixuan',
-            });
+        if (data.fromusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
+            if (content.length > 0) {
+                var RUN = 'r',
+                    WEIGHT = 'w',
+                    PUSH = 'p';
             
-            track.save(function () {
-                msg = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>' + content + ':数据已保存</Content></xml>';
-                
-                res.send(msg);
-            });
-        }
+                switch(type) {
+                case RUN:
+                    type = 'run';
+                    break;
+                case WEIGHT:
+                    type = 'weight';
+                    break;
+                default:
+                    type = 'push';
+                }
 
-        msg = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>主人，收到</Content></xml>';
-        
-        res.send(msg);
+                track = new Track({
+                    info: info,
+                    time: data.createtime[0],
+                    type: type,
+                    name: 'linxixuan',
+                });
+                
+                track.save(function () {
+                    res.send(msgTpl.replace(/\{content\}/, '保存成功'));
+                });
+            } else {
+                res.send(msgTpl.replace(/\{content\}/, '数据格式错误'));
+            }
+        } else {
+            res.send(msgTpl.replace(/\{content\}/, '你不是我的主人~呱'));
+        }
     });
 
     app.get('/tb', function (req, res) {

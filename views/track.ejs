@@ -6,10 +6,10 @@
     <body class="pg-track">
         <% include common/header-simple %>
         <div class="content">
-            <% for(var p in datasets) { %>
-                <% if(datasets.hasOwnProperty(p)) { %>
-                <h3 class="canvas-header flipInX"><%= p %></h3>
-                <canvas id="trackChart-<%= p %>" width=980px height=300px;></canvas>
+            <% for(var type in personalInfo) { %>
+                <% if(personalInfo.hasOwnProperty(type)) { %>
+                <h3 class="canvas-header flipInX"><%= type %></h3>
+                <canvas id="trackChart-<%= type %>" width=980px height=300px;></canvas>
                 <% } %>
             <% } %>
         </div>
@@ -18,28 +18,32 @@
         <script type="text/javascript">
             var data,
                 ctx,
-                myNewChart;
-            <% for(var p in datasets) { %>
-                <% if(datasets.hasOwnProperty(p)) { %>
+                myNewChart,
+                bgs = ['rgba(46, 204, 133, 0.5)', 'rgba(241, 196, 15, 0.5)', 'rgba(52, 152, 219, 0.5)'];
+                colors = ['rgba(46, 204, 133, 1)', 'rgba(241, 196, 15, 1)', 'rgba(52, 152, 219, 1)'];
+            <% for(var type in personalInfo) { %>
+                <% if(personalInfo.hasOwnProperty(type)) { %>
                     data = { 
                         labels :
-                        [<% datasets[p].forEach(function(data) {%>
-                            "<%= data.time %>",
+                        [<% personalInfo[type].time.forEach(function(data) {%>
+                            "<%= data %>",
                         <%})%>],
                         datasets :
-                        [{
-                            labels: "<%= p %>",
-                            fillColor : "rgba(151,187,205,0.5)",
-                            strokeColor : "rgba(151,187,205,1)",
-                            pointColor : "rgba(151,187,205,1)",
-                            pointStrokeColor : "#fff",
-                            data:
-                            [<% datasets[p].forEach(function(data) {%>
-                                <%= data.info %>,
-                            <%})%>]
-                        }]
+                        [<% var index = 0; personalInfo[type].datasets.forEach(function(data) {%>
+                            {
+                                fillColor : bgs[<%= index %>],
+                                strokeColor : colors[<%= index %>],
+                                pointColor : colors[<%= index %>],
+                                pointStrokeColor : "#fff",
+                                data:
+                                [<% data.forEach(function (set) { %>
+                                    <%= set %>,
+                                <% }) %>]
+                            },
+                            <% index++; %>
+                        <%})%>],
                     };
-                    ctx = $("#trackChart-<%= p %>").get(0).getContext("2d");
+                    ctx = $("#trackChart-<%= type %>").get(0).getContext("2d");
                     myNewChart = new Chart(ctx);
                     myNewChart.Line(data);
                 <% } %>
