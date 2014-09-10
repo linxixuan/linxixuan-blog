@@ -73,7 +73,7 @@ header {
 }
 
 header .title {
-    margin:0;
+    margin:0 0 20px;
     padding:30px 0 10px;
     text-align:center;
     font-size:20px;
@@ -91,9 +91,15 @@ header .title a {
     color:#FFF;
 }
 
+header .slogan {
+    margin-bottom:10px;
+    padding-left:15px;
+    font-size:12px;
+    color:#666;
+}
 
 header .nav {
-    padding:20px 0 0 0;
+    margin-bottom:10px;
     list-style:none;
 }
 
@@ -104,6 +110,21 @@ header .nav li a {
 
 header .nav li a:hover {
     color:#000;
+}
+
+header .social {
+    padding-left:10px;
+}
+
+header .social a {
+    margin-right:10px;
+    font-size:24px;
+    color:#AAA;
+}
+header .social a:hover {
+    color:#CF492E;
+    transition:color .2s linear;
+    -webkit-transition:color .2s linear;
 }
 
 /* footer样式 */
@@ -165,10 +186,54 @@ aside .about .link img {
     margin:60px auto 50px;
     width:500px;
 }
+.pg-index .content {
+    position:relative;
+}
+.pg-index .axis {
+    position:absolute;
+    top:-10px;
+    bottom:0;
+    width:0;
+    left:-30px;
+    border-right:2px solid #AAA;
+}
 .pg-index .blog {
-    border-bottom: 2px solid #F7F7F7;
-    padding: 0 0 50px;
-    margin: 0 0 50px;
+    border-bottom:2px solid #F7F7F7;
+    padding:0 0 50px;
+    margin:0 0 50px;
+}
+.pg-index .blog__time {
+    position:relative;
+    margin-left:-30px;
+}
+.pg-index .blog__time:before {
+    position:absolute;
+    content:"";
+    border:2px solid #aaa;
+    border-radius:8PX;
+    width:8px;
+    height:8px;
+    z-index:10;
+    top:5px;
+    left:-2px;
+    background:#FFF;
+}
+.pg-index .blog__time a {
+    margin-left:15px;
+    padding:3px 5px 3px 10px;
+    border-top-right-radius:50px;
+    border-bottom-right-radius:50px;
+    border-top-left-radius:200px;
+    border-bottom-left-radius:200px;
+    font-size:12px;
+    color:#948C76;
+    background:#F7F3EE;
+    transition:margin-left .2s ease,background .2s ease;
+    -webkit-transition:margin-left .2s ease,background .2s ease;
+}
+.pg-index .blog__time a:hover {
+    margin-left:10px;
+    background:#E7D9BA;
 }
 .pg-index .blog__cont {
     margin-bottom:20px;

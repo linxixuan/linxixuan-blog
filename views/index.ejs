@@ -5,17 +5,18 @@
     <body class="pg-index">
         <% include common/header %>
         <div class="body cf">
+            <div class="main blog-list">
             <div class="content">
-                <div class="main blog-list">
+                    <div class="axis"></div>
                     <% blogs.forEach(function (blog) { %>
                     <% var link = '/blog?bname=' + blog.bid; %>
                     <div class="blog">
+                        <div class="blog__time">
+                            <a href="<%= link %>"><%= blog.year + '-' + blog.day %></a>
+                        </div>
                         <div class="blog__cont">
                             <h2><a class="title" href="<%= link %>"><%- blog.title %></a></h2>
                             <p class="text"><%- blog.summary %></p>
-                        </div>
-                        <div class="blog__info">
-                            时间：<a href="<%= link %>" class="time"><%= blog.year + '-' + blog.day %></a>
                         </div>
                         <div class="blog__tag">
                             标签：
