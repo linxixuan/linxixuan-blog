@@ -22,7 +22,7 @@ table {
 /* my style */
 body {
     margin:0;
-    padding:0 0 0 220px;
+    padding:0 0 0 200px;
     font-size:16px;
     font-family:Georgia, 'Times New Roman', Times, 'Songti SC', 'Microsoft YaHei', SimSun, serif;
     font-weight:100;
@@ -129,6 +129,7 @@ header .social a:hover {
 
 /* footer样式 */
 footer {
+    border-top:2px solid #F7F3EE;
     padding:10px 0;
     text-align:center;
 }
@@ -192,7 +193,7 @@ aside .about .link img {
 .pg-index .axis {
     position:absolute;
     top:-10px;
-    bottom:0;
+    bottom:80px;
     width:0;
     left:-30px;
     border-right:2px solid #AAA;
@@ -210,12 +211,12 @@ aside .about .link img {
     position:absolute;
     content:"";
     border:2px solid #aaa;
-    border-radius:8PX;
-    width:8px;
-    height:8px;
+    border-radius:9PX;
+    width:9px;
+    height:9px;
     z-index:10;
     top:5px;
-    left:-2px;
+    left:-3px;
     background:#FFF;
 }
 .pg-index .blog__time a {
@@ -254,6 +255,19 @@ aside .about .link img {
     color:#BCBCBC;
 }
 
+.pg-index .blog__info a,
+.pg-index .blog__tag a {
+    display: inline-block;
+    border-radius:5px;
+    padding:3px 5px;
+    margin-right:5px;
+}
+.pg-index .blog__info a:hover,
+.pg-index .blog__tag a:hover {
+    color:#CF492E;
+    background:#ecf0f1;
+}
+
 .blog .title {
     font-size:18px;
     color:#282828;
@@ -272,7 +286,6 @@ aside .about .link img {
     margin-bottom:30px;
     text-align:center;
     font-size:30px;
-    color:#CF492E;
 }
 .blog--large .blog__content {
     line-height:30px;
@@ -306,6 +319,7 @@ aside .about .link img {
 /* 归档页面 */
 .pg-history .content {
     width:100%;
+    min-height:500px;
 }
 .pg-history .filter {
     margin-top:60px;
@@ -341,12 +355,16 @@ aside .about .link img {
     width:120px;
     height:120px;
     overflow:hidden;
-    text-overflow:ellipsis;
     cursor:pointer;
     font-size:12px;
+    background:#DDD;
 }
 .pg-history .blog .blog__title {
     text-align:center;
+    line-height:1.2em;
+}
+.pg-history .blog__summary {
+    line-height:2em;
 }
 .pg-history .blog:hover .blog__time{
     position:absolute;
@@ -526,11 +544,12 @@ aside .about .link img {
 
 /* gallery */
 .pg-pic .content {
-    min-height:400px;
+    margin-top:50px;
+    min-height:500px;
 }
 .pg-pic .fold {
     float:left;
-    margin-right:30px;
+    margin:0 30px 50px 0;
     padding:10px 0 12px;
     background-color:#FFF;
     box-shadow:1px 1px 3px 1px #BBB;
