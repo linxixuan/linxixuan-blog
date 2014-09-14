@@ -773,7 +773,7 @@ aside .about .link img {
 }
 
 .pg-about .block p,
-.pg-about .block dl {
+.pg-about .block dd {
     margin-bottom:10px;
     line-height:1.5em;
 }
