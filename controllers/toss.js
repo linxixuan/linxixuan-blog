@@ -86,19 +86,20 @@ module.exports = function(app){
     });
 
     app.post('/weixin', function(req, res) {
-        var data = req.body.xml;
+        var data = req.body.xml,
+            result;
 
         console.log(data);
         switch(Weixin.getType(data)) {
         case 'image':
-            res = Weixin.getMsg('这是一个图片信息');
+            result = Weixin.getMsg('这是一个图片信息');
             break;
         default:
-            res = Weixin.handleText(data);
+            result = Weixin.handleText(data);
             break;
         }
 
-        res.send(res);
+        res.send(result);
     });
 
     app.get('/tb', function (req, res) {
