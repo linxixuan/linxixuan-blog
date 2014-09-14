@@ -772,6 +772,8 @@ aside .about .link img {
     font-size:20px;
 }
 
-.pg-about .block p {
+.pg-about .block p,
+.pg-about .block dl {
+    margin-bottom:10px;
     line-height:1.5em;
 }
