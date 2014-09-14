@@ -18,12 +18,20 @@
                 <% } %>
                 <% if(picList.length > 0) { %>
                 <div class="pic-list">
-                    <% picList.forEach(function(pic) { %>
-                        <a class="pic J-pic" href="javascript:void(0)">
-                            <img src="<%= pic.imgSrc%>" data-width="<%= pic.width %>" data-height="<%= pic.height %>" width="400" height="<%= (400 * pic.height / pic.width).toFixed(0) %>" />
+                    <%
+                        var index = 0,
+                        classLabel;
+                        picList.forEach(function(pic) {
+                        classLabel = index === 0 ? '' : ' pic--stack';
+                    %>
+                    <a class="pic J-pic<%= classLabel%>" href="javascript:void(0)">
+                            <img src="<%= pic.imgSrc%>" data-width="<%= pic.width %>" data-height="<%= pic.height %>" width="100%" />
                             <span><%= pic.name %></span>
                         </a>
-                    <% }) %>
+                    <%
+                        index++;
+                        })
+                    %>
                 </div>
                 <% } %>
             </div>
