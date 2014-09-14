@@ -1,5 +1,6 @@
 var Track = require('../models/track'),
     crypto = require('crypto'),
+    Weixin = require('../helper/WeixinHelper.js'),
     path = require('path');
 
 var commonData;
@@ -86,46 +87,18 @@ module.exports = function(app){
     });
 
     app.post('/weixin', function(req, res) {
-        var data = req.body.xml,
-            content = data.content[0].split('-'),
-            type = content.shift(),
-            info = content.join('-');
+        var data = req.body.xml;
 
-        var msgTpl = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>{content}</Content></xml>';
-
-        if (data.fromusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
-            if (content.length > 0) {
-                var RUN = 'r',
-                    WEIGHT = 'w',
-                    PUSH = 'p';
-            
-                switch(type) {
-                case RUN:
-                    type = 'run';
-                    break;
-                case WEIGHT:
-                    type = 'weight';
-                    break;
-                default:
-                    type = 'push';
-                }
-
-                track = new Track({
-                    info: info,
-                    time: data.createtime[0],
-                    type: type,
-                    name: 'linxixuan',
-                });
-                
-                track.save(function () {
-                    res.send(msgTpl.replace(/\{content\}/, '保存成功'));
-                });
-            } else {
-                res.send(msgTpl.replace(/\{content\}/, '数据格式错误'));
-            }
-        } else {
-            res.send(msgTpl.replace(/\{content\}/, '你不是我的主人~呱'));
+        switch(Weixin.getType(data)) {
+        case 'image':
+            res = Weixin.getMsg('这是一个图片信息');
+            break;
+        default:
+            res = Weixin.handleText(data);
+            break;
         }
+
+        res.send(res);
     });
 
     app.get('/tb', function (req, res) {
