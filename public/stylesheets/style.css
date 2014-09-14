@@ -382,21 +382,21 @@ aside .about .link img {
 }
 
 /* 关于我 */
-.pg-about {
+.pg-resume {
     background:#FFF;
 }
-.pg-about .body {
+.pg-resume .body {
     min-height:1000px;
     font-size:18px;
     color:#333;
     line-height:1.5;
 }
-.pg-about .block {
+.pg-resume .block {
     margin-bottom:20px;
     padding:0 20px;
 }
 
-.pg-about .block__title {
+.pg-resume .block__title {
     margin-bottom:10px;
     padding:10px 0;
     border-bottom:1px dashed #AAA;
@@ -404,79 +404,79 @@ aside .about .link img {
     font-weight:bold;
 }
 
-.pg-about .block--life dt,
-.pg-about .block--life dd {
+.pg-resume .block--life dt,
+.pg-resume .block--life dd {
     float:left;
     margin-bottom:10px;
 }
 
-.pg-about .block--life dt {
+.pg-resume .block--life dt {
     clear:left;
     margin-right:20px;
 }
 
-.pg-about .block dd span{
+.pg-resume .block dd span{
     margin-right:20px;
 }
 
-.pg-about .tag {
+.pg-resume .tag {
     margin-right:20px;
     border-radius:3px;
     padding:3px 5px;
     cursor:pointer;
 }
 
-.pg-about .tag:hover {
+.pg-resume .tag:hover {
     background:#333;
     color:#FFF;
     transition:all .3s linear;
 }
 
-.pg-about .tag--meituan {
+.pg-resume .tag--meituan {
     color:#2BB8AA;
 }
 
-.pg-about .tag--meituan:hover {
+.pg-resume .tag--meituan:hover {
     background:#2BB8AA;
     color:#FFF;
 }
 
-.pg-about .tag--SAP {
+.pg-resume .tag--SAP {
     color:#0066B3;
 }
 
-.pg-about .tag--SAP:hover {
+.pg-resume .tag--SAP:hover {
     background:#0066B3;
 }
 
-.pg-about .tag--ZJU {
+.pg-resume .tag--ZJU {
     color:#2980b9;
 }
 
-.pg-about .tag--ZJU:hover {
+.pg-resume .tag--ZJU:hover {
     background:#2980b9;
 }
 
-.pg-about .tag--CSU {
+.pg-resume .tag--CSU {
     color:#f39c12;
 }
 
-.pg-about .tag--CSU:hover {
+.pg-resume .tag--CSU:hover {
     background:#f39c12;
 }
 
-.pg-about .block--hobby dt {
+.pg-resume .block--hobby dt {
     margin:0 0 10px 5px;
     border-left:3px solid #16a085;
     border-bottom:1px dotted #DDD;
     padding-left:5px;
 }
 
-.pg-about .block--hobby dd {
+.pg-resume .block--hobby dd {
     margin:10px 0 20px;
 }
 
-.pg-about .block--program .program {
+.pg-resume .block--program .program {
     float:left;
     position:relative;
     margin:0 15px 10px 0;
@@ -492,7 +492,7 @@ aside .about .link img {
     font-size:14px;
 }
 
-.pg-about .program .inner {
+.pg-resume .program .inner {
     position:absolute;
     padding:30px 20px;
     top:0;
@@ -506,7 +506,7 @@ aside .about .link img {
     background:#CF492E;
 }
 
-.pg-about .program .inner:hover {
+.pg-resume .program .inner:hover {
     opacity:1;
     transition:opacity .3s linear;
 }
@@ -755,4 +755,23 @@ aside .about .link img {
 .pg-track .content {
     font-family:Verdana;
     color:#2980B9;
+}
+
+.pg-about .body {
+    font-family:Georgia, 'Times New Roman', Times, 'Songti SC', 'Microsoft YaHei', SimSun, serif;
+    padding-top:20px;
+}
+
+.pg-about .block {
+    margin-bottom:20px;
+}
+
+.pg-about .block h2 {
+    border-bottom:2px solid #EDEDED;
+    padding-bottom:3px;
+    font-size:20px;
+}
+
+.pg-about .block p {
+    line-height:1.5em;
 }
