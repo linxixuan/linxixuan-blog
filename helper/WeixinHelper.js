@@ -44,12 +44,12 @@ Weixin.handleTrack = function (xmlObj) {
                 type = 'push';
             }
 
-            /*track = new Track({
+            track = new Track({
                 info: info,
                 time: data.createtime[0],
                 type: type,
                 name: 'linxixuan',
-            });*/
+            });
 
             return this.getMsg(xmlObj, '保存成功');
         } else {
