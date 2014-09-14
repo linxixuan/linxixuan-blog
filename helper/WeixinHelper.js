@@ -78,8 +78,9 @@ Weixin.handlePic = function (content) {
     return this.getMsg('这是一个图片');
 }
 
-Weixin.sendMsg = function (content) {
-        var msgTpl = '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>' + content + '</Content></xml>';
+Weixin.getMsg = function (content) {
+        return '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>' + content + '</Content></xml>';
+
 };
 
 module.exports = Weixin;
