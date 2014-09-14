@@ -220,23 +220,36 @@ aside .about .link img {
     background:#FFF;
 }
 .pg-index .blog__time a {
-    margin-left:15px;
-    padding:3px 5px 3px 10px;
-    border-top-right-radius:50px;
-    border-bottom-right-radius:50px;
-    border-top-left-radius:200px;
-    border-bottom-left-radius:200px;
-    font-size:12px;
+    float: left;
+    box-sizing: content-box;
+    margin-left:10px;
+    padding:3px 5px 3px 0;
+    height: 14px;
+    font-size: 12px;
     color:#948C76;
     background:#F7F3EE;
     transition:margin-left .2s ease,background .2s ease;
     -webkit-transition:margin-left .2s ease,background .2s ease;
 }
+.pg-index .blog__time a .arrow {
+    float: left;
+    margin:-3px -1px 0 0;
+    border: 10px dashed #FFF;
+    border-right: 10px solid #F7F3EE;
+    width: 0;
+    height: 0;
+    background: #fff;
+    transition:border .2s ease;
+}
 .pg-index .blog__time a:hover {
-    margin-left:10px;
+    margin-left:3px;
     background:#E7D9BA;
 }
+.pg-index .blog__time a:hover .arrow {
+    border-right-color:#E7D9BA;
+}
 .pg-index .blog__cont {
+    clear:both;
     margin-bottom:20px;
     font-size:14px;
     color:#777;
