@@ -51,12 +51,12 @@ Weixin.handleTrack = function (xmlObj) {
                 name: 'linxixuan',
             });*/
 
-            return this.getMsg('保存成功');
+            return this.getMsg(xmlObj, '保存成功');
         } else {
-            return this.getMsg('数据格式错误');
+            return this.getMsg(xmlObj, '数据格式错误');
         }
     } else {
-        return this.getMsg('你不是我的主人~呱');
+        return this.getMsg(xmlObj, '你不是我的主人~呱');
     } 
 };
 
@@ -66,7 +66,7 @@ Weixin.handleTrack = function (xmlObj) {
  * @return String 处理结果
  */
 Weixin.handleMusic = function (xmlObj) {
-    return this.getMsg('这是一个音乐');
+    return this.getMsg(xmlObj, '这是一个音乐');
 };
 
 /**
@@ -75,10 +75,10 @@ Weixin.handleMusic = function (xmlObj) {
  * @return String 处理结果
  */
 Weixin.handlePic = function (xmlObj) {
-    return this.getMsg('这是一个图片');
+    return this.getMsg(xmlObj, '这是一个图片');
 }
 
-Weixin.getMsg = function (xmlObj) {
+Weixin.getMsg = function (xmlObj, content) {
         return '<xml><ToUserName>' + xmlObj.fromusername[0] + '</ToUserName><FromUserName>' + xmlObj.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>' + content + '</Content></xml>';
 
 };
