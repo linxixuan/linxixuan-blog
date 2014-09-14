@@ -12,9 +12,9 @@ Weixin.getType = function (xmlObj) {
 
 Weixin.handleText = function (xmlObj) {
     if (xmlObj.content[0].indexOf('-') !== -1) {
-        this.handleTrack(xmlObj);
+        return this.handleTrack(xmlObj);
     } else {
-        this.handleMusic(xmlObj);
+        return this.handleMusic(xmlObj);
     }
 }
 /**
