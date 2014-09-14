@@ -10,12 +10,19 @@ Weixin.getType = function (xmlObj) {
     return xmlObj.msgtype[0];
 };
 
+Weixin.handleTrack = function (xmlObj) {
+    if (xmlObj.content[0].indexOf('-') !== -1) {
+        this.handleTrack(xmlObj);
+    } else {
+        this.handleMusic(xmlObj);
+    }
+}
 /**
  * 处理追踪数据
  * @param xml类型的object
  * @return String 处理结果
  */
-Weixin.dealTrack = function (xmlObj) {
+Weixin.handleTrack = function (xmlObj) {
     var content = xmlObj.content[0].split('-'),
         type = content.shift(),
         info = content.join('-');
