@@ -74,12 +74,12 @@ Weixin.handleMusic = function (xmlObj) {
  * @param xml类型的object
  * @return String 处理结果
  */
-Weixin.handlePic = function (content) {
+Weixin.handlePic = function (xmlObj) {
     return this.getMsg('这是一个图片');
 }
 
-Weixin.getMsg = function (content) {
-        return '<xml><ToUserName>' + data.fromusername[0] + '</ToUserName><FromUserName>' + data.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>' + content + '</Content></xml>';
+Weixin.getMsg = function (xmlObj) {
+        return '<xml><ToUserName>' + xmlObj.fromusername[0] + '</ToUserName><FromUserName>' + xmlObj.tousername[0]+ '</FromUserName><CreateTime>' + (+new Date() / 1000).toFixed(0) + '</CreateTime><MsgType>text</MsgType><Content>' + content + '</Content></xml>';
 
 };
 
