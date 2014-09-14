@@ -10,7 +10,7 @@ Weixin.getType = function (xmlObj) {
     return xmlObj.msgtype[0];
 };
 
-Weixin.handleTrack = function (xmlObj) {
+Weixin.handleText = function (xmlObj) {
     if (xmlObj.content[0].indexOf('-') !== -1) {
         this.handleTrack(xmlObj);
     } else {
