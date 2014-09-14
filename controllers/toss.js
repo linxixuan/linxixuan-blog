@@ -53,7 +53,6 @@ module.exports = function(app){
                     personalInfo[type].datasets[j].push(rawData[j]);
                 }
             }
-            console.log(personalInfo);
             data.personalInfo = personalInfo;
             res.render('track', data);
         });
@@ -89,6 +88,7 @@ module.exports = function(app){
     app.post('/weixin', function(req, res) {
         var data = req.body.xml;
 
+        console.log(data);
         switch(Weixin.getType(data)) {
         case 'image':
             res = Weixin.getMsg('这是一个图片信息');

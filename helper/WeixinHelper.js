@@ -1,4 +1,4 @@
-function Weixin(req) {
+function Weixin() {
 };
 
 /**
@@ -7,6 +7,7 @@ function Weixin(req) {
  * @return String 处理结果
  */
 Weixin.getType = function (xmlObj) {
+    return xmlObj.msgtype[0];
 };
 
 /**
@@ -15,6 +16,41 @@ Weixin.getType = function (xmlObj) {
  * @return String 处理结果
  */
 Weixin.dealTrack = function (xmlObj) {
+    var content = xmlObj.content[0].split('-'),
+        type = content.shift(),
+        info = content.join('-');
+
+    if (xmlObj.fromusername.indexOf('oZtA5t1cwg6kooV2X_Hvvxko2t6A') >= 0) {
+        if (content.length > 0) {
+            var RUN = 'r',
+                WEIGHT = 'w',
+                PUSH = 'p';
+
+            switch(type) {
+            case RUN:
+                type = 'run';
+                break;
+            case WEIGHT:
+                type = 'weight';
+                break;
+            default:
+                type = 'push';
+            }
+
+            /*track = new Track({
+                info: info,
+                time: data.createtime[0],
+                type: type,
+                name: 'linxixuan',
+            });*/
+
+            return this.getMsg('保存成功');
+        } else {
+            return this.getMsg('数据格式错误');
+        }
+    } else {
+        return this.getMsg('你不是我的主人~呱');
+    } 
 };
 
 /**
@@ -23,6 +59,7 @@ Weixin.dealTrack = function (xmlObj) {
  * @return String 处理结果
  */
 Weixin.handleMusic = function (xmlObj) {
+    return this.getMsg('这是一个音乐');
 };
 
 /**
@@ -31,6 +68,7 @@ Weixin.handleMusic = function (xmlObj) {
  * @return String 处理结果
  */
 Weixin.handlePic = function (content) {
+    return this.getMsg('这是一个图片');
 }
 
 Weixin.sendMsg = function (content) {
