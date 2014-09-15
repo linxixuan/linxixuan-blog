@@ -1,3 +1,5 @@
+var Track = require('../models/track');
+
 function Weixin() {
 };
 
