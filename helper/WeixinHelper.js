@@ -52,6 +52,7 @@ Weixin.handleTrack = function (xmlObj) {
                 type: type,
                 name: 'linxixuan',
             });
+            track.save();
 
             return this.getMsg(xmlObj, '保存成功');
         } else {
