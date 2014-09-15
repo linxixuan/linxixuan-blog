@@ -67,9 +67,15 @@ header {
     left: 0;
     margin: 0;
     padding:0;
-    width: 200px;
+    width: 100%;
     background: #121212;
     z-index: 100;
+    transition:width .5s ease-in;
+    -webkit-transition:width .6s ease;
+}
+
+.header--anim {
+    width:200px;
 }
 
 header .title {
@@ -93,7 +99,9 @@ header .title a {
 
 header .slogan {
     margin-bottom:10px;
-    padding-left:15px;
+    padding-right:10px;
+    width:100%;
+    text-align:center;
     font-size:12px;
     color:#666;
 }
@@ -103,28 +111,51 @@ header .nav {
     list-style:none;
 }
 
+header .nav li {
+    transform:rotate3d(1, 0, 0, 180deg);
+    -webkit-transform:rotate3d(1, 0, 0, 180deg);
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+
+header .nav .li--anim {
+    transition:transform .3s .5s linear;
+    -webkit-transition:-webkit-transform .3s .5s linear;
+    transform:rotate3d(1, 0, 0, 0);
+    -webkit-transform:rotate3d(1, 0, 0, 0);
+}
+
 header .nav li a {
     font-size:12px;
     color:#AAA;
 }
 
 header .nav li a:hover {
-    color:#000;
+    color:#DDD;
+    background:#000;
 }
 
 header .social {
     padding-left:10px;
+    transform:rotate3d(1, 0, 0, 180deg);
+    -webkit-transform:rotate3d(1, 0, 0, 180deg);
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+
+header .social--anim {
+    transition:transform .3s 1.3s linear;
+    -webkit-transition:-webkit-transform .3s 1.3s linear;
+    transform:rotate3d(1, 0, 0, 0);
+    -webkit-transform:rotate3d(1, 0, 0, 0);
 }
 
 header .social a {
     margin-right:10px;
     font-size:24px;
     color:#AAA;
-}
-header .social a:hover {
-    color:#CF492E;
-    transition:color .2s linear;
-    -webkit-transition:color .2s linear;
+    transition:transform .3s ease-in;
+    -webkit-transition:-webkit-transform .3s ease-in;
 }
 
 /* footer样式 */
@@ -202,6 +233,14 @@ aside .about .link img {
     border-bottom:2px solid #F7F7F7;
     padding:0 0 50px;
     margin:0 0 50px;
+    transform:scale(1, 0);
+    -webkit-transform:scale(1, 0);
+}
+.pg-index .blog--anim {
+    transform:scale(1, 1);
+    -webkit-transform:scale(1, 1);
+    transition:transform .3s 1.5s linear;
+    -webkit-transition:-webkit-transform .3s 1.5s linear;
 }
 .pg-index .blog__time {
     position:relative;
