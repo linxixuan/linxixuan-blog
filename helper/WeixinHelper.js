@@ -48,7 +48,7 @@ Weixin.handleTrack = function (xmlObj) {
 
             track = new Track({
                 info: info,
-                time: data.createtime[0],
+                time: xmlObj.createtime[0],
                 type: type,
                 name: 'linxixuan',
             });
