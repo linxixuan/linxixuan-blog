@@ -74,6 +74,10 @@ header {
     -webkit-transition:width .6s ease;
 }
 
+.header--simple {
+    width:200px;
+}
+
 .header--anim {
     width:200px;
 }
@@ -228,6 +232,16 @@ aside .about .link img {
     width:0;
     left:-30px;
     border-right:2px solid #AAA;
+    transform:scale(1, 0);
+    -webkit-transform:scale(1, 0);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+}
+.pg-index .axis--anim {
+    transform:scale(1, 1);
+    -webkit-transform:scale(1, 1);
+    transition:transform .5s 2s linear;
+    -webkit-transition:-webkit-transform .5s 2s linear;
 }
 .pg-index .blog {
     border-bottom:2px solid #F7F7F7;
@@ -235,6 +249,8 @@ aside .about .link img {
     margin:0 0 50px;
     transform:scale(1, 0);
     -webkit-transform:scale(1, 0);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
 }
 .pg-index .blog--anim {
     transform:scale(1, 1);
