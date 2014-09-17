@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <% include common/head %>
+    </head>
+    <body class="pg-music">
+        <% include common/header-simple %>
+        <div class="body cf">
+            <ul class="music-list">
+            <% musicArr.forEach(function (music) {%>
+                <li>
+                    <h4 class="music__title">歌名：<%=music.title%></h4>
+                    <p class="music__author">歌手：<%=music.author%></p>
+                    <p class="music__track">专辑：<%=music.track%></p>
+                </li>
+            <%})%>
+            </ul>
+        </div>
+        <% include common/footer %>
+    </body>
+</html>

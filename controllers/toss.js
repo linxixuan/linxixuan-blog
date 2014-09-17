@@ -134,6 +134,21 @@ module.exports = function(app){
         });
     });
 
+    // 音乐库
+    app.get('/music', function (req, res) {
+        var dir = path.resolve(__dirname, '..'),
+            data = commonData,
+            count = 20;
+        fs.readFile(dir + '/webroot/music.txt', function (err, mu) {
+            var musicArr = JSON.parse(mu.toString());
+            musicArr = musicArr.slice(0, count);
+
+            data.musicArr = musicArr;
+
+            res.render('music.ejs', data);
+        });
+    });
+
     // 关于我
     app.get('/about', function (req, res) {
         var data = commonData;
