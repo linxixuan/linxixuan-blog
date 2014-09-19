@@ -110,10 +110,9 @@ module.exports = function(app){
 
     app.get('/', function (req, res) {
         var data = commonData;
-        Blog.get({}, function (blogs) {
+        Blog.get({bid:{'$ne': 'webp'}}, function (blogs) {
             // 对日期进行处理
             for(var index in blogs) {
-                if (blogs[index].bid === 'webp') continue;
                 var date = blogs[index].date;
                 blogs[index].day = (date.getMonth() + 1) + '-' + date.getDate();
                 blogs[index].year = date.getFullYear();
@@ -154,6 +153,8 @@ module.exports = function(app){
             }
             config = {date: {$lt: endDate, $gte: beginDate}};
         }
+
+        config.bid = {'$ne': 'webp'};
 
         Blog.get(config, function (blogs) {
             var tagList = [],
