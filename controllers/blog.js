@@ -113,6 +113,7 @@ module.exports = function(app){
         Blog.get({}, function (blogs) {
             // 对日期进行处理
             for(var index in blogs) {
+                if (blogs[index].bid === 'webp') continue;
                 var date = blogs[index].date;
                 blogs[index].day = (date.getMonth() + 1) + '-' + date.getDate();
                 blogs[index].year = date.getFullYear();
@@ -159,6 +160,7 @@ module.exports = function(app){
                 dateList = [];
             // 对日期进行处理
             for(var index in blogs) {
+                if (blogs[index].bid === 'webp') continue;
                 var date = blogs[index].date,
                     tags = blogs[index].tags,
                     year = date.getFullYear(),
