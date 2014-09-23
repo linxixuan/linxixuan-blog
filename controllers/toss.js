@@ -1,5 +1,5 @@
-var Track = require('../models/track'),
-
+var https = require('https'),
+    Track = require('../models/track'),
     crypto = require('crypto'),
     Weixin = require('../helper/WeixinHelper.js'),
     path = require('path');
@@ -139,14 +139,47 @@ module.exports = function(app){
     app.get('/music', function (req, res) {
         var dir = path.resolve(__dirname, '..'),
             data = commonData,
-            count = 20;
+            count = 20,
+            id;
         fs.readFile(dir + '/webroot/music.txt', function (err, mu) {
             var musicArr = JSON.parse(mu.toString());
+
             musicArr = musicArr.slice(0, count);
+            id = musicArr[0].id;
+            https.get('https://api.douban.com/v2/music/' + id, function (d) {
 
-            data.musicArr = musicArr;
+                d.on('data', function (info) {
+                    var info = JSON.parse(info.toString());
+                    data.musicArr = musicArr;
+                    data.src = info.image.replace(/spic/, 'lpic');
+                    data.title = info.title;
+                    data.name = [];
+                    for(var p in info.author) {
+                        data.name.push(info.author[p].name); 
+                    }
+                    data.name = data.name.join('/');
+                    console.log(info.author);
+                    data.track = info.alt_title;
+                    data.description = info.summary;
 
-            res.render('music.ejs', data);
+                    res.render('music.ejs', data);
+                });
+            });
+
+        });
+    });
+    
+    // 获取音乐信息
+    app.get('/getMusicInfo', function (req, res) {
+        var id = req.param('id');
+
+        https.get('https://api.douban.com/v2/music/' + id, function (data) {
+
+            data.on('data', function (info) {
+                var info = info.toString();
+                res.set("Content-Type", "application/json");
+                res.send(JSON.stringify(info));
+            });
         });
     });
 

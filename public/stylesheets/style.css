@@ -859,3 +859,25 @@ aside .about .link img {
     margin-bottom:10px;
     line-height:1.5em;
 }
+
+.pg-music .body {
+    padding-top:80px;
+    width:1120px;
+    min-height:500px;
+}
+
+.pg-music .music-info {
+    margin:0 auto;
+    width:600px;
+}
+
+.pg-music .music-info .cover {
+    float:left;
+    margin-right:20px;
+}
+
+.pg-music .music-list {
+    position:fixed;
+    top:20px;
+    right:20px;
+}
