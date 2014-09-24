@@ -859,7 +859,9 @@ aside .about .link img {
     margin-bottom:10px;
     line-height:1.5em;
 }
-
+.pg-music {
+    background:#ECF0F1;
+}
 .pg-music .body {
     padding-top:80px;
     width:1120px;
@@ -868,16 +870,58 @@ aside .about .link img {
 
 .pg-music .music-info {
     margin:0 auto;
-    width:600px;
+    width:300px;
 }
 
 .pg-music .music-info .cover {
-    float:left;
-    margin-right:20px;
+    border-radius:150px;
+    box-shadow:0 0 0 8px #FFF, 0px 0px 10px 12px #999;
+    -webkit-animation:rotate 10s linear forwards infinite; 
+    animation:rotate 10s linear forwards infinite; 
 }
-
+.pg-music .music-info .title {
+    text-align:center;
+    font-size:18px;
+}
+.pg-music .music-info .description {
+    text-align:center;
+    font-size:14px;
+}
 .pg-music .music-list {
     position:fixed;
     top:20px;
     right:20px;
+    padding:0;
+    list-style:none;
+    font-size:14px;
+    color:#ecf0f1;
+    background:#34495e;
+}
+.pg-music .music-list li {
+    border-bottom:1px solid #2c3e50;
+    padding:10px 5px;
+    cursor:pointer;
+}
+.pg-music .music-list .music_title {
+    margin:0;
+    font-size:14px;
+}
+
+@keyframes rotate {
+    0% {
+        transform:rotate(0deg);
+    }
+
+    100% {
+        transform:rotate(360deg);
+    }
+}
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform:rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform:rotate(360deg);
+    }
 }

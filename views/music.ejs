@@ -14,10 +14,10 @@
             <ul class="music-list">
             <% musicArr.forEach(function (music) {%>
                 <li>
-                    <h4 class="music__title">歌名：<%=music.title%></h4>
-                    <div class="extra" style="display:none">
-                        <p class="music__author">歌手：<%=music.author%></p>
-                        <p class="music__track">专辑：<%=music.track%></p>
+                    <h4 class="music__title"><i class="fa fa-music"></i>&nbsp;<%=music.title%></h4>
+                    <div class="extra">
+                        <p class="music__author"><%=music.author%></p>
+                        <p class="music__track"><%=music.track%></p>
                     </div>
                 </li>
             <%})%>
