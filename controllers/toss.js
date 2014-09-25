@@ -139,7 +139,7 @@ module.exports = function(app){
     app.get('/music', function (req, res) {
         var dir = path.resolve(__dirname, '..'),
             data = commonData,
-            count = 20,
+            count = 10,
             id;
         fs.readFile(dir + '/webroot/music.txt', function (err, mu) {
             var musicArr = JSON.parse(mu.toString());
@@ -158,7 +158,6 @@ module.exports = function(app){
                         data.name.push(info.author[p].name); 
                     }
                     data.name = data.name.join('/');
-                    console.log(info.author);
                     data.track = info.alt_title;
                     data.description = info.summary;
 

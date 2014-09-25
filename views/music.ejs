@@ -6,7 +6,7 @@
         <% include common/header-simple %>
         <div class="body cf">
             <div class="music-info clearfix">
-                <img class="cover" src="<%= src %>"></img>
+                <img class="cover" src="<%= src %>" width="300" height="300"/>
                 <h3 class="title"><%= title %> - <%= name %></h3>
                 <p class="track"><%= track %></p>
                 <p class="description"><%= description %></p>
@@ -14,10 +14,10 @@
             <ul class="music-list">
             <% musicArr.forEach(function (music) {%>
                 <li>
-                    <h4 class="music__title"><i class="fa fa-music"></i>&nbsp;<%=music.title%></h4>
+                    <h4 class="music__title" data-id="<%=music.id%>"><i class="fa fa-music"></i>&nbsp;<%=music.title%></h4>
                     <div class="extra">
-                        <p class="music__author"><%=music.author%></p>
-                        <p class="music__track"><%=music.track%></p>
+                        <p class="music__author"><i class="fa fa-male"></i>&nbsp;<%=music.author%></p>
+                        <p class="music__track"><i class="fa fa-dot-circle-o"></i>&nbsp;<%=music.track%></p>
                     </div>
                 </li>
             <%})%>
@@ -26,14 +26,30 @@
         <% include common/footer %>
         <script>
             $(function() {
-                $('.music').click(function () {
-                    this
+                $('.music-list li').hover(function () {
+                    $('.active').removeClass('active');
+                    $(this).addClass('active');
                 });
-                $.ajax({
-                    url: '/getMusicInfo?id=2170619',
-                    method: 'get'
-                }).done(function(data) {
-                    console.log(data);
+                $('.music-list li').click(function () {
+                    var id = $(this).find('.music__title').data('id');
+                    $.ajax({
+                        url: '/getMusicInfo?id=' + id,
+                        method: 'get'
+                    }).done(function(data) {
+                        var music = JSON.parse(data),
+                            ndInfo = $('.music-info'),
+                            author = [];
+                        
+                        ndInfo.find('.cover')[0].src = music.image.replace(/spic/, 'lpic');
+                        ndInfo.find('.title')[0].innerHTML = music.title;
+                        ndInfo.find('.track')[0].innerHTML = music.alt_title;
+                        for(var p in music.author) {
+                            author.push(music.author[p].name); 
+                        }
+                        author = author.join('/');
+                        ndInfo.find('.author')[0].innerHTML = music.alt_title;
+                        ndInfo.find('.description')[0].innerHTML = music.summary;
+                    });
                 });
             });
         </script>

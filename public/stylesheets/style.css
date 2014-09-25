@@ -874,7 +874,7 @@ aside .about .link img {
 }
 
 .pg-music .music-info .cover {
-    border-radius:150px;
+    border-radius:200px;
     box-shadow:0 0 0 8px #FFF, 0px 0px 10px 12px #999;
     -webkit-animation:rotate 10s linear forwards infinite; 
     animation:rotate 10s linear forwards infinite; 
@@ -901,10 +901,26 @@ aside .about .link img {
     border-bottom:1px solid #2c3e50;
     padding:10px 5px;
     cursor:pointer;
+    box-shadow:inset 0 1px 10px 0px #2c3e50;
 }
-.pg-music .music-list .music_title {
+.pg-music .music-list .music__title {
     margin:0;
     font-size:14px;
+}
+
+.pg-music .music-list .extra {
+    margin:0 0 0 10px;
+}
+.pg-music .music-list .extra p {
+    margin:0;
+    height:0;
+    opacity:0;
+}
+.pg-music .active .extra p {
+    margin:5px 0;
+    height:14px;
+    opacity:1;
+    transition:height .2s ease, opacity .2s ease, margin .2s ease;
 }
 
 @keyframes rotate {
