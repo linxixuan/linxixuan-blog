@@ -183,9 +183,10 @@ module.exports = function(app){
         var id = req.param('id');
 
         https.get('https://api.douban.com/v2/music/' + id, function (data) {
-
-            data.on('data', function (info) {
-                var info = info.toString();
+            var info = "";
+            data.on('data', function (data) {
+                info += data.toString();
+            }).end(function () {
                 res.set("Content-Type", "application/json");
                 res.send(JSON.stringify(info));
             });
