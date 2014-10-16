@@ -144,7 +144,7 @@ module.exports = function(app){
             data = commonData,
             count = 10,
             id;
-        Music.find({title: "The Long Goodbye"}).exec(function (err, musicArr) {
+        Music.find({url: {$nq: ""}}).exec(function (err, musicArr) {
             musicArr = musicArr.slice(0, count);
             id = musicArr[0].douban_id;
             url = musicArr[0].url;
