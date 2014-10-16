@@ -144,15 +144,18 @@ module.exports = function(app){
             data = commonData,
             count = 10,
             id;
-        Music.find({url: {$ne: ""}}).exec(function (err, musicArr) {
+        Music.find({title: "The Long Goodbye"}).exec(function (err, musicArr) {
             musicArr = musicArr.slice(0, count);
             id = musicArr[0].douban_id;
             url = musicArr[0].url;
 
             https.get('https://api.douban.com/v2/music/' + id, function (d) {
-                d.on('data', function (info) {
-                    var info = JSON.parse(info.toString()),
-                        music = {};
+                var info = '';
+                d.on('data', function (data) {
+                    info += data.toString();
+                }).on('end', function () {
+                    var music = {};
+                    info = JSON.parse(info);
 
                     music.src = info.image.replace(/spic/, 'lpic');
                     music.title = musicArr[0].title;
