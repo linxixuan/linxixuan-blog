@@ -186,7 +186,7 @@ module.exports = function(app){
             var info = "";
             data.on('data', function (data) {
                 info += data.toString();
-            }).end(function () {
+            }).on('end', function () {
                 res.set("Content-Type", "application/json");
                 res.send(JSON.stringify(info));
             });
