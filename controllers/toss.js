@@ -2,9 +2,12 @@ var https = require('https'),
     Track = require('../models/track'),
     crypto = require('crypto'),
     Weixin = require('../helper/WeixinHelper.js'),
+    Music = require('../models/music'),
+    mongoose = require('mongoose'),
     path = require('path');
 
 var commonData;
+Music = mongoose.model('Music');
 
 module.exports = function(app){
     commonData = {
@@ -141,25 +144,29 @@ module.exports = function(app){
             data = commonData,
             count = 10,
             id;
-        fs.readFile(dir + '/webroot/music.txt', function (err, mu) {
-            var musicArr = JSON.parse(mu.toString());
-
+        Music.find({url: {$not: {$eq: ""}}}).exec(function (err, musicArr) {
             musicArr = musicArr.slice(0, count);
             id = musicArr[0].id;
-            https.get('https://api.douban.com/v2/music/' + id, function (d) {
+            url = musicArr[0].url;
 
+            https.get('https://api.douban.com/v2/music/' + id, function (d) {
                 d.on('data', function (info) {
-                    var info = JSON.parse(info.toString());
-                    data.musicArr = musicArr;
-                    data.src = info.image.replace(/spic/, 'lpic');
-                    data.title = info.title;
-                    data.name = [];
+                    var info = JSON.parse(info.toString()),
+                        music = {};
+
+                    music.src = info.image.replace(/spic/, 'lpic');
+                    music.title = musicArr[0].title;
+                    music.name = [];
                     for(var p in info.author) {
-                        data.name.push(info.author[p].name); 
+                        music.name.push(info.author[p].name); 
                     }
-                    data.name = data.name.join('/');
-                    data.track = info.alt_title;
-                    data.description = info.summary;
+                    music.name = music.name.join('/');
+                    music.track = info.alt_title;
+                    music.description = info.summary;
+                    music.url = url;
+
+                    data.music = music;
+                    data.musicArr = musicArr;
 
                     res.render('music.ejs', data);
                 });

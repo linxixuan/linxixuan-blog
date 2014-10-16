@@ -863,13 +863,18 @@ aside .about .link img {
     background:#ECF0F1;
 }
 .pg-music .body {
-    padding-top:80px;
-    width:1120px;
-    min-height:500px;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
 .pg-music .music-info {
-    margin:0 auto;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:-150px 0 0 -150px;
     width:300px;
 }
 
