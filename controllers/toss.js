@@ -144,9 +144,9 @@ module.exports = function(app){
             data = commonData,
             count = 10,
             id;
-        Music.find({url: {$not: {$eq: ""}}}).exec(function (err, musicArr) {
+        Music.find({url: {$ne: ""}}).exec(function (err, musicArr) {
             musicArr = musicArr.slice(0, count);
-            id = musicArr[0].id;
+            id = musicArr[0].douban_id;
             url = musicArr[0].url;
 
             https.get('https://api.douban.com/v2/music/' + id, function (d) {

@@ -7,7 +7,8 @@ var musicSchema = new Schema({
     author: String,
     track: String,
     url: String,
-    id: String
+    id: String,
+    douban_id: String
 },{
     collection: 'music'
 });

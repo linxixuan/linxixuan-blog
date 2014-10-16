@@ -15,10 +15,11 @@
             <ul class="music-list">
             <% musicArr.forEach(function (item) {%>
                 <li>
-                    <h4 class="music__title" data-id="<%=item.id%>" data-title="<%=item.title%>"><i class="fa fa-music"></i>&nbsp;<%=item.title%></h4>
+                    <h4 class="music__title" data-id="<%=item.douban_id%>" data-title="<%=item.title%>"><i class="fa fa-music"></i>&nbsp;<%=item.title%></h4>
                     <div class="extra">
                         <p class="music__author"><i class="fa fa-male"></i>&nbsp;<%=item.author%></p>
                         <p class="music__track"><i class="fa fa-dot-circle-o"></i>&nbsp;<%=item.track%></p>
+                        <p class="music__url" style="display:none"><%= item.url %></p>
                     </div>
                 </li>
             <%})%>
@@ -40,11 +41,12 @@
                     $(this).addClass('active');
                 });
 
-                $('.J-placeholder').html(ReferrerKiller.htmlString('<audio controls autoplay name="media"><source src="http://m1.music.126.net/rvBnXfLwbrGEj0VkA00ZWw==/2057186255574162.mp3" type="audio/mpeg"></audio>'));
+                setAudio("<%= music.url%>");
 
                 $('.music-list li').click(function () {
                     var id = $(this).find('.music__title').data('id'),
-                        title = $(this).find('.music__title').data('title');
+                        title = $(this).find('.music__title').data('title'),
+                        url = $(this).find('.music__url').html();
                     $.ajax({
                         url: '/getMusicInfo?id=' + id,
                         method: 'get'
@@ -62,9 +64,15 @@
                         author = author.join('/');
                         ndInfo.find('.author')[0].innerHTML = author;
                         ndInfo.find('.description')[0].innerHTML = music.summary;
+                        setAudio(url);
                     });
                 });
             });
+
+            // 设置音乐插件
+            function setAudio(url) {
+                $('.J-placeholder').html(ReferrerKiller.htmlString('<audio controls autoplay name="media"><source src="' + url + '" type="audio/mpeg"></audio>'));
+            }
         </script>
     </body>
 </html>
