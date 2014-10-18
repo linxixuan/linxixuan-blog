@@ -942,6 +942,7 @@ aside .about .link img {
 }
 .pg-music .music-list-wrapper .trigger {
     float:right;
+    font-size:32px;
     color:#27AE60;
 }
 .pg-music .music-list {
