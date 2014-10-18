@@ -60,7 +60,10 @@ $(function () {
             $(this).next('.music-list').addClass('music-list--expand');
         });
         $('.music-list').on('mouseleave, click', function () {
-            $(this).removeClass('music-list--expand');
+            var that = this;
+            setTimeout(function () {
+                $(that).removeClass('music-list--expand');
+            }, 500);
         });
         $('.music-list li').hover(function () {
             $('.active').removeClass('active');

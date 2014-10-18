@@ -888,6 +888,8 @@ aside .about .link img {
 
 .pg-music .music-info .cover {
     border-radius:200px;
+    width:300px;
+    height:300px;
     box-shadow:0 0 0 8px #FFF, 0px 0px 10px 12px #999;
     cursor:pointer;
 }

@@ -1,0 +1,54 @@
+.pg-music .music-info {
+    margin:-300px 0 0 -300px;
+    width:600px;
+}
+
+.pg-music .music-info .cover {
+    border-radius:300px;
+    width:600px;
+    height:600px;
+}
+.pg-music .music-info .status {
+    top:300px;
+    left:300px;
+    margin:-70px 0 0 -70px;
+    border-radius:75px;
+    border-width:15px;
+    width:150px;
+    height:150px;
+    font-size:54px;
+    line-height:123px;
+}
+
+.pg-music .music-info .status--pause {
+    padding-left:20px;
+}
+.pg-music .music-info .status-wrapper {
+    top: 300px;
+    left: 300px;
+    margin: -110px 0 0 -110px;
+    border-radius:100px;
+    width: 200px;
+    height: 200px;
+}
+.pg-music .music-info .title {
+    font-size:32px;
+}
+.pg-music .music-info .description,
+.pg-music .music-info .track {
+    font-size:24px;
+}
+
+.pg-music .music-list-wrapper .trigger {
+    font-size:64px;
+}
+.pg-music .music-list .music__title {
+    font-size:32px;
+}
+
+.pg-music .music-list .extra {
+    font-size:24px;
+}
+.pg-music .active .extra p {
+    height:26px;
+}

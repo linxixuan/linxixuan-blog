@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <% include common/head %>
+    <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 600px)" href="/stylesheets/music-tiny.css" />
     </head>
     <body class="pg-music">
         <div class="body cf">
             <div class="music-info clearfix">
-                <img class="cover" src="<%= music.src %>" width="300" height="300"/>
+                <img class="cover" src="<%= music.src %>"/>
                 <i class="status J-status fa"></i>
                 <div class="status-wrapper"></div>
                 <h3 class="title"><span class="name"><%= music.title %></span> - <span class="author"><%= music.name %></span></h3>
