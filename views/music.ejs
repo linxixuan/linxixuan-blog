@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html>
     <% include common/head %>
-    <script src="/javascripts/referrerkiller.js"></script>
     </head>
     <body class="pg-music">
         <div class="body cf">
             <div class="music-info clearfix">
                 <img class="cover" src="<%= music.src %>" width="300" height="300"/>
+                <i class="status J-status fa fa-pause"></i>
+                <div class="status-wrapper"></div>
                 <h3 class="title"><span class="name"><%= music.title %></span> - <span class="author"><%= music.name %></span></h3>
                 <p class="track"><%= music.track %></p>
                 <p class="description"><%= music.description %></p>
             </div>
-            <div class="J-placeholder"></div>
-            <ul class="music-list">
-            <% musicArr.forEach(function (item) {%>
-                <li>
-                    <h4 class="music__title" data-id="<%=item.douban_id%>" data-title="<%=item.title%>"><i class="fa fa-music"></i>&nbsp;<%=item.title%></h4>
-                    <div class="extra">
-                        <p class="music__author"><i class="fa fa-male"></i>&nbsp;<%=item.author%></p>
-                        <p class="music__track"><i class="fa fa-dot-circle-o"></i>&nbsp;<%=item.track%></p>
-                        <p class="music__url" style="display:none"><%= item.url %></p>
-                    </div>
-                </li>
-            <%})%>
-            </ul>
+            <div class="J-placeholder" style="display:none;"></div>
+            <div class="music-list-wrapper">
+                <i class="trigger fa fa-list J-trigger"></i>
+                <ul class="music-list" style="display:none;">
+                <% musicArr.forEach(function (item) {%>
+                    <li>
+                        <h4 class="music__title" data-id="<%=item.douban_id%>" data-title="<%=item.title%>"><i class="fa fa-music"></i>&nbsp;<%=item.title%></h4>
+                        <div class="extra">
+                            <p class="music__author"><i class="fa fa-male"></i>&nbsp;<%=item.author%></p>
+                            <p class="music__track"><i class="fa fa-dot-circle-o"></i>&nbsp;<%=item.track%></p>
+                            <p class="music__url" style="display:none"><%= item.url %></p>
+                        </div>
+                    </li>
+                <%})%>
+                </ul>
+            <div>
         </div>
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -34,45 +38,7 @@
           ga('send', 'pageview');
         </script>
         <script src="/javascripts/jquery-1.11.1.min.js"></script>
-        <script>
-            $(function() {
-                $('.music-list li').hover(function () {
-                    $('.active').removeClass('active');
-                    $(this).addClass('active');
-                });
-
-                setAudio("<%= music.url%>");
-
-                $('.music-list li').click(function () {
-                    var id = $(this).find('.music__title').data('id'),
-                        title = $(this).find('.music__title').data('title'),
-                        url = $(this).find('.music__url').html();
-                    $.ajax({
-                        url: '/getMusicInfo?id=' + id,
-                        method: 'get'
-                    }).done(function(data) {
-                        var music = JSON.parse(data),
-                            ndInfo = $('.music-info'),
-                            author = [];
-                        
-                        ndInfo.find('.cover')[0].src = music.image.replace(/spic/, 'lpic');
-                        ndInfo.find('.name')[0].innerHTML = title;
-                        ndInfo.find('.track')[0].innerHTML = music.alt_title;
-                        for(var p in music.author) {
-                            author.push(music.author[p].name); 
-                        }
-                        author = author.join('/');
-                        ndInfo.find('.author')[0].innerHTML = author;
-                        ndInfo.find('.description')[0].innerHTML = music.summary;
-                        setAudio(url);
-                    });
-                });
-            });
-
-            // 设置音乐插件
-            function setAudio(url) {
-                $('.J-placeholder').html(ReferrerKiller.htmlString('<audio controls autoplay name="media"><source src="' + url + '" type="audio/mpeg"></audio>'));
-            }
-        </script>
+        <script src="/javascripts/referrerkiller.js"></script>
+        <script src="/javascripts/music.js"></script>
     </body>
 </html>

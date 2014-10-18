@@ -750,8 +750,8 @@ aside .about .link img {
     background:#FFF;
 }
 .pg-404 .hinge {
-    -webkit-animation:hinge 1.6s ease-in forwards;
-    animation:hinge 1.6s .5s ease-in forwards;
+    -webkit-animation:hinge 1.6s ease-in;
+    animation:hinge 1.6s .5s ease-in;
 }
 
 /*team building 助手 */
@@ -878,11 +878,54 @@ aside .about .link img {
     width:300px;
 }
 
+.pg-music .music-info .description {
+    line-height:1.5em;
+    height:4.5em;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
 .pg-music .music-info .cover {
     border-radius:200px;
     box-shadow:0 0 0 8px #FFF, 0px 0px 10px 12px #999;
-    -webkit-animation:rotate 10s linear forwards infinite; 
-    animation:rotate 10s linear forwards infinite; 
+    cursor:pointer;
+}
+
+.pg-music .music-info .status {
+    position:absolute;
+    top:150px;
+    left:150px;
+    display:block;
+    margin:-35px 0 0 -35px;
+    border:3px solid;
+    border-radius:40px;
+    width:70px;
+    height:70px;
+    text-align:center;
+    line-height:70px;
+    font-size:40PX;
+    color:#FFF;
+    cursor:pointer;
+}
+.pg-music .music-info .status-wrapper {
+    position:absolute;
+    top:150px;
+    left:150px;
+    margin:-50px 0 0 -50px;
+    border-radius:50px;
+    width:100px;
+    height:100px;
+    opacity:0;
+    transform:scale(0);
+    -webkit-transform:scale(0);
+}
+
+.pg-music .music-info .status-wrapper--anim {
+    animation:scale .5s ease-in-out forwards;
+    -webkit-animation:scale .5s ease-in-out forwards;
+}
+.pg-music .music-info .status--pause {
+    padding-left:10px;
 }
 .pg-music .music-info .title {
     text-align:center;
@@ -892,15 +935,34 @@ aside .about .link img {
     text-align:center;
     font-size:14px;
 }
-.pg-music .music-list {
+.pg-music .music-list-wrapper {
     position:fixed;
     top:20px;
     right:20px;
+}
+.pg-music .music-list-wrapper .trigger {
+    float:right;
+    color:#27AE60;
+}
+.pg-music .music-list {
+    clear:both;
     padding:0;
     list-style:none;
     font-size:14px;
     color:#ecf0f1;
     background:#34495e;
+    opacity:0;
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    transform:scale(1,0);
+    -webkit-transform:scale(1,0);
+    transition:transform .3s ease-in-out, opacity .3s ease-in-out;
+    -webkit-transition:transform .3s ease-in-out, opacity .3s ease-in-out;
+}
+.pg-music .music-list--expand {
+    opacity:1;
+    transform:scale(1,1);
+    -webkit-transform:scale(1,1);
 }
 .pg-music .music-list li {
     border-bottom:1px solid #2c3e50;
@@ -925,24 +987,32 @@ aside .about .link img {
     margin:5px 0;
     height:14px;
     opacity:1;
-    transition:height .2s ease, opacity .2s ease, margin .2s ease;
+    transition:height .3s ease, opacity .3s ease, margin .3s ease;
 }
 
-@keyframes rotate {
+@keyframes scale {
     0% {
-        transform:rotate(0deg);
+        opacity:0;
+        transform:scale(0);
+        -webkit-transform:scale(0);
     }
-
     100% {
-        transform:rotate(360deg);
+        opacity:1;
+        transform:scale(1);
+        -webkit-transform:scale(1);
     }
 }
-@-webkit-keyframes rotate {
+@-webkit-keyframes scale {
     0% {
-        -webkit-transform:rotate(0deg);
+        opacity:0;
+        box-shadow:0 0 2px 5px #FFF;
+        transform:scale(0);
+        -webkit-transform:scale(0);
     }
-
     100% {
-        -webkit-transform:rotate(360deg);
+        opacity:1;
+        box-shadow:0 0 20px 10px transparent;
+        transform:scale(3);
+        -webkit-transform:scale(3);
     }
 }
