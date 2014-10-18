@@ -59,7 +59,7 @@ $(function () {
             $(this).next('.music-list').show();
             $(this).next('.music-list').addClass('music-list--expand');
         });
-        $('.music-list').on('mouseleave', function () {
+        $('.music-list').on('mouseleave, click', function () {
             $(this).removeClass('music-list--expand');
         });
         $('.music-list li').hover(function () {
