@@ -871,6 +871,14 @@ aside .about .link img {
     width:320px;
 }
 
+.pg-music .back-link {
+    font-size:16px;
+    position:fixed;
+    top:20px;
+    left:20px;
+    color:#27AE60;
+}
+
 .pg-music .music-info {
     position:absolute;
     top:50%;

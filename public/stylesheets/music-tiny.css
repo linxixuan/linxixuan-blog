@@ -34,6 +34,9 @@
 .pg-music .music-info .title {
     font-size:32px;
 }
+.pg-music .back-link {
+    font-size:32px;
+}
 .pg-music .music-info .description,
 .pg-music .music-info .track {
     font-size:24px;
