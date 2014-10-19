@@ -169,7 +169,7 @@ module.exports = function(app){
                     music.url = url;
 
                     data.music = music;
-                    data.title = '悦|乐——林夕轩';
+                    data.title = '悦♨乐——林夕轩';
                     data.musicArr = musicArr;
 
                     res.render('music.ejs', data);
