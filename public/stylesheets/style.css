@@ -20,6 +20,9 @@ table {
 }
 
 /* my style */
+html {
+    height:100%;
+}
 body {
     margin:0;
     padding:0 0 0 200px;
@@ -1072,4 +1075,136 @@ aside .about .link img {
         transform:scale(3);
         -webkit-transform:scale(3);
     }
+}
+
+/* wq */
+.pg-wq {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:0;
+    background:-webkit-linear-gradient(blue, #00BFFF);
+    background:-o-linear-gradient(blue, #00BFFF);
+    background:-moz-linear-gradient(blue, #00BFFF);
+    background:linear-gradient(blue, #00BFFF);
+}
+.night {
+    background:-webkit-linear-gradient(#333, #666);
+}
+.pg-wq .switch {
+    position:absolute;
+    top:50%;
+    left:50%;
+}
+.pg-wq .sun {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:100px;
+    width:100px;
+    height:100px;
+    background:yellow;
+    border-radius:50%;
+    z-index:2;
+    animation:light 1s ease-in-out infinite alternate;
+    -webkit-animation:light 1s ease-in-out infinite alternate;
+}
+
+.pg-wq .moon {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:100px;
+    width:100px;
+    height:100px;
+    background:white;
+    border-radius:50%;
+    z-index:2;
+    animation:moon-light 1s ease-in-out infinite alternate;
+    -webkit-animation:moon-light 1s ease-in-out infinite alternate;
+}
+
+@keyframes light {
+    from {
+        box-shadow: inset 0px 0px 20px 15px gold,0px 10px 60px 10px yellow;
+    }
+    to {
+        box-shadow: inset 0px 0px 20px 15px gold,0px 20px 100px 10px yellow;
+    }
+}
+@-webkit-keyframes light {
+    from {
+        box-shadow: inset 0px 0px 20px 15px gold,0px 10px 60px 10px yellow;
+    }
+    to {
+        box-shadow: inset 0px 0px 20px 15px gold,0px 10px 80px 25px yellow;
+    }
+}
+@keyframes moon-light {
+    from {
+        box-shadow: inset 0px 0px 20px 15px #BBB,0px 10px 60px 10px white;
+    }
+    to {
+        box-shadow: inset 0px 0px 20px 15px #BBB,0px 20px 100px 10px white;
+    }
+}
+@-webkit-keyframes moon-light {
+    from {
+        box-shadow: inset 0px 0px 20px 15px #EAEAEA,0px 10px 60px 10px white;
+    }
+    to {
+        box-shadow: inset 0px 0px 20px 15px #EAEAEA,0px 20px 100px 10px white;
+    }
+}
+.onoffswitch {
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin:40px 0 0 -100px;
+    width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #34A7C1; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    border: 2px solid #999999; border-radius: 20px;
+    position: absolute; top: -5px; bottom: 0; right: 56px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
 }

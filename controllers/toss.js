@@ -200,6 +200,12 @@ module.exports = function(app){
         res.render('about', data);
     });
 
+    // 状态
+    app.get('/wq', function (req, res) {
+        var data = commonData;
+        res.render('wq', data);
+    });
+
     // 404
     app.use(function(req, res, next) {
         res.status(404);
