@@ -27,6 +27,25 @@ body {
     font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 
+table,p {
+    margin-bottom:15px;
+}
+
+tr {
+    border-bottom:1px solid #999;
+}
+th {
+    background:#EEE;
+}
+td,th {
+    border-right:1px dotted #999;
+    padding:0 10px;
+}
+td:last-child,
+th:last-child {
+    border-right:none;
+}
+
 code {
     color:lightcoral;
     background:beige;
@@ -57,6 +76,22 @@ a:hover {
     height:0;
     overflow:hidden;
     visibility:hidden;
+}
+h1, .h1 {
+    font-size:32px;
+}
+h2, .h2 {
+    font-size:28px;
+}
+h3, .h3 {
+    font-size:24px;
+}
+h4, .h4 {
+    font-size:20px;
+}
+h5, .h5 {
+    font-size:16px;
+    font-weight:bold;
 }
 
 header {
@@ -350,6 +385,7 @@ aside .about .link img {
 /* 单博客页面 */
 .pg-blog {
     background:#FFF;
+    width:980px;
 }
 .blog--large {
     margin:0 0 20px;
@@ -364,9 +400,6 @@ aside .about .link img {
 }
 .blog--large .blog__content {
     line-height:30px;
-}
-.blog--large .blog__content p {
-    text-indent:2em;
 }
 
 .blog--large .blog__content blockquote p {
