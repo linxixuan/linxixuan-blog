@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
     <% include common/head %>
+    <link rel='stylesheet' href='/stylesheets/wq.css' />
     </head>
     <body class="pg-wq">
-        <div class="sun">
-        </div>
-        <div class="onoffswitch">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-            <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-            </label>
-        </div>
+        <div class="sky"></div>
+        <div class="sky-night" style="opacity:0"></div>
+        <div class="sun"></div>
+        <div class="moon"></div>
+        <div class="cloud cloud--left"></div>
+        <div class="cloud cloud--right"></div>
+        <div class="cloud cloud--down"></div>
+        <input class="J-button switch" type="button" value="我不忙" />
+        <script>
+            requirejs.config({
+                "baseUrl": "javascripts/",
+                paths: {
+                    jquery: 'jquery-1.11.1.min',
+                }
+            });
+            requirejs(["wq"]);
+        </script>
     </body>
 </html>
