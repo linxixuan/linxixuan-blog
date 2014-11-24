@@ -1,3 +1,4 @@
+/*jshint white:true, unused:true*/
 setTimeout(function () {
     (function() {
         var disqus_shortname = 'linxixuan';

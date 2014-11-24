@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "linxixuan",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,5 +10,25 @@
     "ejs": "*",
     "mongoose": "*",
     "marked": "~0.3.2"
-  }
+  },
+  "description": "my personel blog",
+  "main": "app.js",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-stylus": "^0.20.0",
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linxixuan/linxixuan-blog.git"
+  },
+  "keywords": [
+    "blog",
+    "f2e"
+  ],
+  "author": "linxixuan",
+  "bugs": {
+    "url": "https://github.com/linxixuan/linxixuan-blog/issues"
+  },
+  "homepage": "https://github.com/linxixuan/linxixuan-blog"
 }
