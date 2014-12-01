@@ -33,7 +33,7 @@ module.exports = function (grunt) {
             // 更新stylus文件，需要重新编译
             css: {
                 tasks: ['default'],
-                files: 'public/stylus/base.styl'
+                files: 'public/stylus/*.styl'
             }
         }
     });

@@ -1,0 +1,76 @@
+/*team building 助手 */
+.pg-tb {
+    background:#FFF;
+    .content {
+        position:relative;
+        margin:-50px auto 0;
+        padding-top:50px;
+        width:980px;
+    }
+
+    .editor,
+    .viewer {
+        float:left;
+        width:45%;
+    }
+
+    .viewer {
+        float:right;
+        .plan {
+            margin-bottom:10px;
+            boder-radius 3px;
+            padding: 20px;
+            background: #ecf0f1;
+        }
+        .plan-wrapper {
+            margin-top:20px;
+        }
+
+        .url,
+        .remark {
+            display:block;
+            margin-bottom:10px;
+            color:#34495e;
+        }
+        .url:hover {
+            transition:color .3s ease-in;
+            -webkit-transition:color .3s ease-in;
+            color:#d35400;
+        }
+        .form-group {
+            float:left;
+            margin-right:2%;
+            width:48%
+        }
+        .tags {
+            list-style:none;
+            margin:0;
+            padding:0;
+
+            li {
+                float:left;
+                margin-right:10px;
+                padding:5px 10px;
+                line-height:26px;
+                background:#27ae60;
+                color:#FFF;
+                cursor:pointer;
+            }
+
+            li:before {
+                content:'';
+            }
+        }
+
+    }
+
+    .sperator {
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:50%;
+        border-right:1px solid #999;
+        width:0;
+    }
+
+}
