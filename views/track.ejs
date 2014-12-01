@@ -14,43 +14,41 @@
             <% } %>
         </div>
         <% include common/footer %>
-        <script src="/javascripts/Chart.min.js"></script>
         <script type="text/javascript">
-            var data,
-                ctx,
-                myNewChart,
-                bgs = ['rgba(46, 204, 133, 0.5)', 'rgba(241, 196, 15, 0.5)', 'rgba(52, 152, 219, 0.5)'];
-                colors = ['rgba(46, 204, 133, 1)', 'rgba(241, 196, 15, 1)', 'rgba(52, 152, 219, 1)'];
-            <% for(var type in personalInfo) { %>
-                <% if(personalInfo.hasOwnProperty(type)) { %>
-                    data = { 
-                        labels :
-                        [<% personalInfo[type].time.forEach(function(data) {%>
-                            "<%= data %>",
-                        <%})%>],
-                        datasets :
-                        [<% var index = 0; personalInfo[type].datasets.forEach(function(data) {%>
-                            {
-                                fillColor : bgs[<%= index %>],
-                                strokeColor : colors[<%= index %>],
-                                pointColor : colors[<%= index %>],
-                                pointStrokeColor : "#fff",
-                                data:
-                                [<% data.forEach(function (set) { %>
-                                    <%= set %>,
-                                <% }) %>]
-                            },
-                            <% index++; %>
-                        <%})%>],
-                    };
-                    ctx = $("#trackChart-<%= type %>").get(0).getContext("2d");
-                    myNewChart = new Chart(ctx);
-                    myNewChart.Line(data);
+            require(['jquery', 'chartjs'], function ($) {
+                var data,
+                    ctx,
+                    myNewChart,
+                    bgs = ['rgba(46, 204, 133, 0.5)', 'rgba(241, 196, 15, 0.5)', 'rgba(52, 152, 219, 0.5)'];
+                    colors = ['rgba(46, 204, 133, 1)', 'rgba(241, 196, 15, 1)', 'rgba(52, 152, 219, 1)'];
+                <% for(var type in personalInfo) { %>
+                    <% if(personalInfo.hasOwnProperty(type)) { %>
+                        data = { 
+                            labels :
+                            [<% personalInfo[type].time.forEach(function(data) {%>
+                                "<%= data %>",
+                            <%})%>],
+                            datasets :
+                            [<% var index = 0; personalInfo[type].datasets.forEach(function(data) {%>
+                                {
+                                    fillColor : bgs[<%= index %>],
+                                    strokeColor : colors[<%= index %>],
+                                    pointColor : colors[<%= index %>],
+                                    pointStrokeColor : "#fff",
+                                    data:
+                                    [<% data.forEach(function (set) { %>
+                                        <%= set %>,
+                                    <% }) %>]
+                                },
+                                <% index++; %>
+                            <%})%>],
+                        };
+                        ctx = $("#trackChart-<%= type %>").get(0).getContext("2d");
+                        myNewChart = new Chart(ctx);
+                        myNewChart.Line(data);
+                    <% } %>
                 <% } %>
-            <% } %>
-            setTimeout(function () {
-                $('.canvas-header').addClass('animated flipInX');        
-            }, 1000);
+            });
         </script>
     </body>
 </html>

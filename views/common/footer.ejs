@@ -4,11 +4,12 @@
         <a class="extra-link" href="http://linxixuan.lofter.com/" target="_blank">Style Comes From LOFTER</a>
     </div>
     <script>
-        requirejs.config({
+        var require = requirejs.config({
             baseUrl: "javascripts/",
             paths: {
                 jquery: 'jquery-1.11.1.min',
-                bootstrap: 'bootstrap.min'
+                bootstrap: 'bootstrap.min',
+                chartjs: 'Chart.min'
             },
             shim: {
                 bootstrap: ["jquery"],

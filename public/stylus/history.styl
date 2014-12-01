@@ -1,0 +1,75 @@
+/* 归档页面 */
+.pg-history {
+    .content {
+        width:100%;
+        min-height:500px;
+    }
+    .filter {
+        margin-top:60px;
+        padding:0 0 10px 0;
+        border-bottom:1px dotted #999;
+        width:100%;
+        list-style:none;
+    }
+    .filter__item {
+        float:left;
+        margin-right:20px;
+        padding:5px 10px;
+        border:1px solid #666;
+        border-radius 2px;
+        background:#EEE;
+        opacity:.8;
+        box-shadow:1px 1px 5px 1px #999;
+        outline:none;
+    }
+    .filter__item:hover {
+        opacity:1;
+    }
+    .blog-list {
+        padding-top:20px;
+    }
+    .blog {
+        position:relative;
+        float:left;
+        margin-top:0;
+        margin-right:15px;
+        padding:5px;
+        border-radius 3px;
+        width:120px;
+        height:120px;
+        overflow:hidden;
+        cursor:pointer;
+        font-size:12px;
+        background:#DDD;
+        &:hover {
+            .blog__title,
+            .blog__summary {
+                -moz-filter: blur(1px) brightness(5%);
+                -webkit-filter: blur(1px) brightness(5%);
+                -o-filter: blur(1px) brightness(5%);
+                -ms-filter: blur(1px) brightness(5%);
+                filter: blur(1px) brightness(5%); 
+            }
+        
+            .blog__time{
+                position:absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+                line-height:120px;
+                text-align:center;
+                font-size:20px;
+                color:#333;
+                z-index:10;
+            }
+        }
+    }
+    .blog__title {
+        text-align:center;
+        line-height:1.2em;
+    }
+    .blog__summary {
+        line-height:2em;
+    }
+}

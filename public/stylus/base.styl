@@ -1,5 +1,5 @@
 /* mixins */
-/border-radius /g()
+/border-radius ()
     -webkit-border-radius arguments
     -moz-border-radius arguments
     border-radius arguments
@@ -32,8 +32,9 @@ html {
 body {
     margin:0;
     padding:0 0 0 200px;
-    font-size:16px;
-    font-family:"lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size:14px;
+    font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,sans-serif;
+    color:#666;
 }
 
 hr {
@@ -91,20 +92,27 @@ a:hover {
     visibility:hidden;
 }
 h1, .h1 {
-    font-size:32px;
+    font-size:24px;
+    color:#333;
 }
 h2, .h2 {
-    font-size:28px;
+    font-size:20px;
+    border-bottom:1px solid #dcdcdc;
+    padding-bottom:5px;
+    color:#333;
 }
 h3, .h3 {
-    font-size:24px;
+    font-size:18px;
+    color:#333;
 }
 h4, .h4 {
-    font-size:20px;
+    font-size:16px;
+    color:#333;
 }
 h5, .h5 {
-    font-size:16px;
+    font-size:14px;
     font-weight:bold;
+    color:#333;
 }
 
 header {
@@ -148,7 +156,7 @@ header .title {
 header .title .avatar {
     display:block;
     margin:0 auto 10px;
-    boder-radius 5px;
+    border-radius 5px;
     text-align:center;
 }
 
@@ -323,71 +331,6 @@ aside .about .link img {
     margin-right:10px;
 }
 
-/* 归档页面 */
-.pg-history .content {
-    width:100%;
-    min-height:500px;
-}
-.pg-history .filter {
-    margin-top:60px;
-    padding:0 0 10px 0;
-    border-bottom:1px dotted #999;
-    width:100%;
-    list-style:none;
-}
-.pg-history .filter__item {
-    float:left;
-    margin-right:20px;
-    padding:5px 10px;
-    border:1px solid #666;
-    boder-radius 2px;
-    background:#EEE;
-    opacity:.8;
-    box-shadow:1px 1px 5px 1px #999;
-    outline:none;
-}
-.pg-history .filter__item:hover {
-    opacity:1;
-}
-.pg-history .blog-list {
-    padding-top:20px;
-}
-.pg-history .blog {
-    position:relative;
-    float:left;
-    margin-top:0;
-    margin-right:15px;
-    padding:5px;
-    boder-radius 3px;
-    width:120px;
-    height:120px;
-    overflow:hidden;
-    cursor:pointer;
-    font-size:12px;
-    background:#DDD;
-}
-.pg-history .blog .blog__title {
-    text-align:center;
-    line-height:1.2em;
-}
-.pg-history .blog__summary {
-    line-height:2em;
-}
-.pg-history .blog:hover .blog__time{
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    line-height:120px;
-    text-align:center;
-    font-size:24px;
-    color:#FFF;
-    background:#333;
-    opacity:.7;
-    z-index:10;
-}
-
 /* 关于我 */
 .pg-resume {
     background:#FFF;
@@ -428,7 +371,7 @@ aside .about .link img {
 
 .pg-resume .tag {
     margin-right:20px;
-    boder-radius 3px;
+    border-radius 3px;
     padding:3px 5px;
     cursor:pointer;
 }
@@ -488,7 +431,7 @@ aside .about .link img {
     position:relative;
     margin:0 15px 10px 0;
     border:1px solid #D4D4D4;
-    boder-radius 5px;
+    border-radius 5px;
     padding:10px;
     width:150px;
     height:150px;
@@ -721,6 +664,7 @@ aside .about .link img {
     line-height:1.5em;
 }
 
+@import 'history'
 @import 'index.styl'
 @import 'tb.styl'
 @import 'music.styl'
