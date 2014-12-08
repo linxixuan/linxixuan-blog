@@ -15,27 +15,31 @@ var highlight = function(code, lang){
     } else if (lang == 'html') {
         lang = 'xml';
     }
-
     if(lang){
         o = hljs.highlight(lang, code);
     } else {
         o = hljs.highlightAuto(code).value;
     }
-    var html = o.value;
-    if(html){
-        return html;
+
+    if(o){
+        if (o.value) {
+            return o.value;
+        } else {
+            return o;
+        }
     } else {
         return code;
     }
 };
 marked.setOptions({
+    renderer: new marked.Renderer(),
     gfm: true,
     tables: true,
-    breaks: true,
+    breaks: false,
     pedantic: false,
-    sanitize: false,
+    sanitize: true,
     smartLists: true,
-    langPrefix: '',
+    smartypants: false,
     highlight: highlight
 });
 

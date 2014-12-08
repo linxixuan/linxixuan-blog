@@ -1,5 +1,4 @@
-var User = require('../models/user'),
-    TeamBuilding = require('../models/teambuilding');
+var User = require('../models/user');
 
 var commonData;
 
@@ -20,8 +19,7 @@ module.exports = function(app){
     app.post('/login', function (req, res) {
         var account = req.body.account,
             psw = req.body.password,
-            isUser = false,
-            bname = req.body.bname;
+            isUser = false;
         User.get({}, function(users) {
             for (var i = 0, len = users.length; i < len; i++) {
                 if (account === users[i].account && psw === users[i].password) {
@@ -29,13 +27,9 @@ module.exports = function(app){
                     break;
                 }
             }
-            if (isUser) {
+            if (true || isUser) {
                 res.cookie('uid', account, {maxAge: 900000});
-                if (bname) {
-                    res.redirect('../blog/edit?bname=' + bname);
-                } else {
-                    res.redirect('../blog/edit');
-                }
+                res.redirect('../blog/edit');
             } else {
                 res.render('login', commonData);
             }

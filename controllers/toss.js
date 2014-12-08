@@ -206,6 +206,12 @@ module.exports = function(app){
         res.render('wq', data);
     });
 
+    // 春运抢票
+    app.get('/sf', function (req, res) {
+        var data = commonData;
+        res.render('sf', data);
+    });
+
     // 404
     app.use(function(req, res, next) {
         res.status(404);

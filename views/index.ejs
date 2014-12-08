@@ -11,7 +11,7 @@
                     <% blogs.forEach(function (blog) { %>
                     <% var link = '/blog?bname=' + blog.bid; %>
                     <div class="blog">
-                        <div class="blog__time">
+                        <div class="blog__time clearfix">
                             <a href="<%= link %>"><i class="arrow"></i><%= blog.year + '-' + blog.day %></a>
                         </div>
                         <div class="blog__cont">
