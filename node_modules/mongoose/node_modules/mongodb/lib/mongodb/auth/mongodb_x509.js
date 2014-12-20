@@ -3,9 +3,12 @@ var DbCommand = require('../commands/db_command').DbCommand
   , Binary = require('bson').Binary
   , format = require('util').format;
 
-var authenticate = function(db, username, password, options, callback) {
+var authenticate = function(db, username, password, options, callback, t) {
   var numberOfConnections = 0;
   var errorObject = null;
+  var numberOfValidConnections = 0;
+  var credentialsValid = false;
+  options = options || {};
   
   if(options['connection'] != null) {
     //if a connection was explicitly passed on options, then we have only one...
@@ -39,6 +42,9 @@ var authenticate = function(db, username, password, options, callback) {
         errorObject = err;
       } else if(result.documents[0].err != null || result.documents[0].errmsg != null){
         errorObject = utils.toError(result.documents[0]);
+      } else {
+        credentialsValid = true;
+        numberOfValidConnections = numberOfValidConnections + 1;        
       }
 
       // Work around the case where the number of connections are 0
@@ -46,11 +52,11 @@ var authenticate = function(db, username, password, options, callback) {
         var internalCallback = callback;
         callback = null;
 
-        if(errorObject == null && result.documents[0].ok == 1) {
+        if(errorObject == null && credentialsValid) {
           // We authenticated correctly save the credentials
           db.serverConfig.auth.add('MONGODB-X509', db.databaseName, username, password);
           // Return callback
-          internalCallback(errorObject, true);
+          internalCallback(errorObject, true);          
         } else {
           internalCallback(errorObject, false);
         }
