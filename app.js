@@ -37,7 +37,7 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 
 fs.readdirSync('./controllers').forEach(function (file) {
-    if(file.substr(-3) == '.js') {
+    if(file.substr(-3) === '.js') {
         route = require('./controllers/' + file);
         route(app);
     }
