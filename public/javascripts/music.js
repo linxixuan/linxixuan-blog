@@ -7,6 +7,7 @@ define(["jquery", "referrerkiller", "tool", "ga"], function ($) {
             setAudio($('.music-list li .music__url').html());
             insertControllers();
             bindEvent();
+            createTool();
         }
 
         function bindEvent() {
@@ -120,5 +121,57 @@ define(["jquery", "referrerkiller", "tool", "ga"], function ($) {
             player = ndBody[0].querySelector('audio');
         }
 
+        function updateMusicList(arr) {
+            var res = '',
+                item;
+            for(var i = 0 , len = arr.length; i < len; i++) {
+                item = arr[i];
+                res += '<li>' +
+                        '<h4 class="music__title" data-id="' + item.douban_id + '" data-title="' + item.title + '"><i class="fa fa-music"></i>&nbsp;' + item.title + '</h4>' +
+                        '<div class="extra">' +
+                            '<p class="music__author"><i class="fa fa-male"></i>&nbsp;' + item.author + '</p>' +
+                            '<p class="music__track"><i class="fa fa-dot-circle-o"></i>&nbsp;' + item.track + '</p>' +
+                            '<p class="music__url" style="display:none">' + item.url + '</p>' +
+                        '</div>' +
+                    '</li>';
+            }
+            
+            $('.music-list').html(res);
+            bindPlayList();
+            changeSong(0);
+        }
+
+        function createTool() {
+            var tool = '<i class="fa fa-dot-circle-o tool-trigger J-tool-trigger"></i>',
+                toolWrapper = '' +
+                '<div class="J-tool-wrapper tool-wrapper" style="display:none">' +
+                    '<i class="fa fa-plus J-plus tool"></i>' +
+                    '<i class="fa fa-minus J-minus tool"></i>' +
+                    '<i class="fa fa-forward J-next tool"></i>' +
+                    '<i class="fa fa-fast-forward J-next-decade tool"></i>' +
+                '</div>',
+                nlTool;
+
+            $('body').append(tool);
+            $('body').append(toolWrapper);
+
+            toolWrapper = $('.J-tool-wrapper');
+            $('.J-tool-trigger').hover(function () {
+                toolWrapper.show();
+            });
+
+            $('.J-next').on('click', function () {
+                changeSong(parseInt(Math.random() * 10, 10));
+            });
+
+            $('.J-next-decade').on('click', function () {
+                $.ajax({
+                    url: '/musiclist',
+                    method: 'get'
+                }).done(function(data) {
+                    updateMusicList(JSON.parse(data));
+                });
+            });
+        }
     });
 });

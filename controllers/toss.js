@@ -138,44 +138,60 @@ module.exports = function(app){
         });
     });
 
+    // 曲库
+    app.get('/musiclist', function (req, res) {
+        Music.where({url: {$ne: ""}}).count(function (err, count) {
+            var random = parseInt(Math.random() * (count - 10), 10);
+            Music.find({url: {$ne: ""}}).skip(random).limit(10).exec(function (err, musicArr) {
+                console.log(musicArr);
+                res.send(JSON.stringify(musicArr));
+            });
+        });
+    });
+
     // 音乐库
     app.get('/music', function (req, res) {
         var dir = path.resolve(__dirname, '..'),
             data = commonData,
-            count = 10,
             id;
-        Music.find({url: {$ne: ""}}).exec(function (err, musicArr) {
-            musicArr = musicArr.slice(0, count);
-            id = musicArr[0].douban_id;
-            url = musicArr[0].url;
 
-            https.get('https://api.douban.com/v2/music/' + id, function (d) {
-                var info = '';
-                d.on('data', function (data) {
-                    info += data.toString();
-                }).on('end', function () {
-                    var music = {};
-                    info = JSON.parse(info);
+        http.get('http://localhost:8080/musiclist', function (d) {
+            var arr = '';
+            d.on('data', function (data) {
+                arr += data;
+            }).on('end', function () {
+                var list = JSON.parse(arr),
+                    id = list[0].douban_id,
+                    url = list[0].url,
+                    musicArr = list;
 
-                    music.src = info.image.replace(/spic/, 'lpic');
-                    music.title = musicArr[0].title;
-                    music.name = [];
-                    for(var p in info.author) {
-                        music.name.push(info.author[p].name); 
-                    }
-                    music.name = music.name.join('/');
-                    music.track = info.alt_title;
-                    music.description = info.summary;
-                    music.url = url;
+                https.get('https://api.douban.com/v2/music/' + id, function (d) {
+                    var info = '';
+                    d.on('data', function (data) {
+                        info += data.toString();
+                    }).on('end', function () {
+                        var music = {};
+                        info = JSON.parse(info);
 
-                    data.music = music;
-                    data.title = '悦♨乐——林夕轩';
-                    data.musicArr = musicArr;
+                        music.src = info.image.replace(/spic/, 'lpic');
+                        music.title = musicArr[0].title;
+                        music.name = [];
+                        for(var p in info.author) {
+                            music.name.push(info.author[p].name); 
+                        }
+                        music.name = music.name.join('/');
+                        music.track = info.alt_title;
+                        music.description = info.summary;
+                        music.url = url;
 
-                    res.render('music.ejs', data);
+                        data.music = music;
+                        data.title = '悦♨乐——林夕轩';
+                        data.musicArr = musicArr;
+
+                        res.render('music.ejs', data);
+                    });
                 });
             });
-
         });
     });
     

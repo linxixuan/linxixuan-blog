@@ -51,7 +51,7 @@
             height:70px;
             text-align:center;
             line-height:70px;
-            font-size:40PX;
+            font-size:40px;
             color:#FFF;
             cursor:pointer;
         }
@@ -96,7 +96,7 @@
         .trigger {
             float:right;
             font-size:32px;
-            color:#27AE60;
+            color:#2c3e50;
         }
     }
     .music-list {
@@ -119,11 +119,16 @@
             padding:10px 5px;
             cursor:pointer;
             box-shadow:inset 0 1px 10px 0px #2c3e50;
+            &.active {
+                background: #f39c12;
+                box-shadow: inset 0 1px 10px 0 #f1c40f;
+            }
         }
 
         .music__title {
             margin:0;
             font-size:14px;
+            color:#ecf0f1;
         }
 
         .extra {
@@ -149,4 +154,41 @@
         opacity:1;
         transition:height .3s ease, opacity .3s ease, margin .3s ease;
     }
+
+    .tool-trigger,
+    .tool-wrapper {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .tool-wrapper {
+        right: 80px;
+    }
+    
+    .tool-trigger,
+    .tool {
+        font-size: 26px;
+        background: #e74c3c;
+        border-radius: 50%;
+        padding: 13px 16px;
+        margin-right:10px;
+        color: #ecf0f1;
+        cursor:pointer;
+    }
+
+    .tool-trigger {
+        color: #e74c3c;
+        background: transparent;
+        font-size: 60px;
+        padding: 0;
+        margin-bottom: -6px;
+    }
+
+
+    .fa-fast-forward,
+    .fa-forward {
+        padding: 13px 10px 13px 16px;
+    }
+    
 }
