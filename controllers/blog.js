@@ -116,7 +116,7 @@ module.exports = function(app){
 
     app.get('/', function (req, res) {
         var data = commonData;
-        Blog.find({}).limit(10).exec(function (err, blogs) {
+        Blog.find({}).sort({date: 'desc'}).limit(10).exec(function (err, blogs) {
             // 对日期进行处理
             for(var index in blogs) {
                 var date = blogs[index].date;
