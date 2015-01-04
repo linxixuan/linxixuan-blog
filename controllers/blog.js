@@ -3,9 +3,11 @@
  */
 var Blog = require('../models/blog'),
     hljs = require('highlight.js'),
+    mongoose = require('mongoose'),
     marked = require('marked');
 
 var commonData;
+Blog = mongoose.model('Blog');
 
 var highlight = function(code, lang){
     var o;
@@ -54,7 +56,7 @@ module.exports = function(app){
     app.get('/blog', function (req, res) {
         var data = commonData,
             bname = req.query.bname;
-        Blog.get({bid: bname}, function (blog) {
+        Blog.find({bid: bname}).exec(function (err, blog) {
             if (blog[0]) {
                 blog = blog[0];
                 blog.day = blog.date.getFullYear() + '-' + (blog.date.getMonth() + 1) + '-' + blog.date.getDate();
@@ -99,7 +101,7 @@ module.exports = function(app){
             bname = req.query.bname;
         if (req.cookies.uid) {
             if (bname) {
-                Blog.get({bid: bname}, function (blog) {
+                Blog.find({bid: bname}).exec(function (err, blog) {
                     data.blog = blog[0];
                     res.render('blog/edit', data);
                 });
@@ -114,7 +116,7 @@ module.exports = function(app){
 
     app.get('/', function (req, res) {
         var data = commonData;
-        Blog.get({bid:{'$ne': 'webp'}}, function (blogs) {
+        Blog.find({}).limit(10).exec(function (err, blogs) {
             // 对日期进行处理
             for(var index in blogs) {
                 var date = blogs[index].date;
@@ -160,7 +162,7 @@ module.exports = function(app){
 
         config.bid = {'$ne': 'webp'};
 
-        Blog.get(config, function (blogs) {
+        Blog.find(config).exec(function (err, blogs) {
             var tagList = [],
                 dateList = [];
             // 对日期进行处理

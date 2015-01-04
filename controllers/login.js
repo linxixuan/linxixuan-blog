@@ -1,6 +1,8 @@
-var User = require('../models/user');
+var User = require('../models/user'),
+    mongoose = require('mongoose');
 
 var commonData;
+User = mongoose.model('User');
 
 module.exports = function(app){
     commonData = {
@@ -19,17 +21,18 @@ module.exports = function(app){
     app.post('/login', function (req, res) {
         var account = req.body.account,
             psw = req.body.password,
+            bname = req.query.bname,
             isUser = false;
-        User.get({}, function(users) {
+        User.find({}).exec(function(err, users) {
             for (var i = 0, len = users.length; i < len; i++) {
                 if (account === users[i].account && psw === users[i].password) {
                     isUser = true;
                     break;
                 }
             }
-            if (true || isUser) {
+            if (isUser) {
                 res.cookie('uid', account, {maxAge: 900000});
-                res.redirect('../blog/edit');
+                res.redirect('../blog/edit' + (bname ? '?bname=' + bname : ''));
             } else {
                 res.render('login', commonData);
             }
