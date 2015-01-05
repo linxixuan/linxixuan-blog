@@ -142,7 +142,7 @@ define(["jquery", "referrerkiller", "tool", "ga"], function ($) {
         }
 
         function createTool() {
-            var tool = '<i class="fa fa-music tool-trigger J-tool-trigger"></i>',
+            var tool = '<i class="fa fa-music tool-trigger J-tool-trigger boom"></i>',
                 toolWrapper = '' +
                 '<div class="J-tool-wrapper tool-wrapper">' +
                     '<i class="fa fa-plus J-plus tool"></i>' +
@@ -157,6 +157,7 @@ define(["jquery", "referrerkiller", "tool", "ga"], function ($) {
 
             toolWrapper = $('.J-tool-wrapper');
             $('.J-tool-trigger').click(function () {
+                $(this).removeClass('boom');
                 $('.J-tool-wrapper i').each(function (index) {
                     $(this).addClass('r' + (index + 1));
                 });
