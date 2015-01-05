@@ -164,6 +164,8 @@
 
     .tool-wrapper {
         right: 80px;
+        height:52px;
+        width:100px;
     }
     
     .tool-trigger,
@@ -178,17 +180,109 @@
     }
 
     .tool-trigger {
-        color: #e74c3c;
-        background: transparent;
-        font-size: 60px;
-        padding: 0;
-        margin-bottom: -6px;
+        background: #e74c3c;
+        font-size: 30px;
+        padding: 14px 16px 11px 12px;
     }
-
+    
+    .tool {
+        position:absolute;
+        top:0;
+        right:0;
+        opacity:0;
+    }
 
     .fa-fast-forward,
     .fa-forward {
         padding: 13px 10px 13px 16px;
     }
     
+    .r1 {
+        animation(r1 .4s ease-in forwards);
+    }
+
+    .r2 {
+        animation(r2 .4s .15s ease-in forwards);
+    }
+
+    .r3 {
+        animation(r3 .4s .2s ease-in forwards);
+    }
+
+    .r4 {
+        animation(r4 .4s .25s ease-in forwards);
+    }
+
+    .rb {
+        animation(rb .4s ease-out forwards);
+    }
+}
+
+@keyframes r1 {
+    from {
+        transform(scale(0)rotate(0deg));
+        opacity:0;
+        right:0;
+    }
+
+    to {
+        transform(scale(1)rotate(720deg));
+        opacity:1;
+        right:80px;
+    }
+}
+
+@keyframes r2 {
+    from {
+        transform(scale(0)rotate(0deg));
+        opacity:0;
+    }
+
+    to {
+        transform(scale(1)rotate(720deg));
+        opacity:1;
+        top: -55px;
+        right: 50px;
+    }
+}
+
+@keyframes r3 {
+    from {
+        transform(scale(0)rotate(0deg));
+        opacity:0;
+    }
+
+    to {
+        transform(scale(1)rotate(720deg));
+        opacity:1;
+        top: -105px;
+        right: 0;
+    }
+}
+
+@keyframes r4 {
+    from {
+        transform(scale(0)rotate(0deg));
+        opacity:0;
+    }
+
+    to {
+        transform(scale(1)rotate(720deg));
+        opacity:1;
+        top: -130px;
+        right: -54px;
+    }
+}
+
+@keyframes rb {
+    from {
+        opacity:1;
+    }
+
+    to {
+        transform(scale(0)rotate(0));
+        opacity:0;
+        top: 0;
+        right: 0;
+    }
 }
