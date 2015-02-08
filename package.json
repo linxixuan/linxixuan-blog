@@ -9,7 +9,8 @@
     "ejs": "^1.0.0",
     "express": "^3.4.8",
     "marked": "^0.3.2",
-    "mongoose": "^3.8.21"
+    "mongoose": "^3.8.21",
+    "pm2": "^0.12.5"
   },
   "description": "my personel blog",
   "main": "app.js",
